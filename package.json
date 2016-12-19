@@ -1,0 +1,42 @@
+{
+  "name": "react-append-to-body",
+  "version": "1.0.0",
+  "description": "Higher order react component that appends components outside of the main applications DOM",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "demo": "resources/scripts/demo.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpgorman/react-append-to-body.git"
+  },
+  "keywords": [
+    "react",
+    "HOC",
+    "Append to DOM"
+  ],
+  "author": "JP Gorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpgorman/react-append-to-body/issues"
+  },
+  "homepage": "https://github.com/jpgorman/react-append-to-body#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "ramda": "^0.22.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}
