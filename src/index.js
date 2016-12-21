@@ -21,7 +21,7 @@ export function componentWillAppendToBody(NewComponent) {
     }
 
     componentWillUnmount() {
-      this.deleteAppendElement()
+      this.deleteAppendElement(this.uniqueId)
     }
 
     update() {

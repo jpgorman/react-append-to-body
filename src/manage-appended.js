@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {keys, reduce, map, find, propEq, prop, compose, uniq, filter} from "ramda"
+import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
 
 const appendedElements = {}
 
@@ -29,8 +29,10 @@ export class ManageAppendedComponents extends React.Component {
     this.renderAppendedElements()
   }
 
-  deleteAppendElement() {
-    delete appendedElements[this.appendElementId]
+  deleteAppendElement(key) {
+    const currentElement = appendedElements[key]
+    delete appendedElements[key]
+    ReactDOM.unmountComponentAtNode(document.querySelector(currentElement.appendElementContainer))
     this.renderAppendedElements()
   }
 
@@ -47,7 +49,7 @@ export class ManageAppendedComponents extends React.Component {
         accum.push(val.content)
         return accum
       }, [], matching)
-      console.log(elementContainer)
+
       ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
     }, elementContainers)
 
