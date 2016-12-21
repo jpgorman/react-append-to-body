@@ -1,9 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {keys, reduce} from "ramda"
+import {keys, reduce, map, find, propEq, prop, compose, uniq, filter} from "ramda"
 
 const appendedElements = {}
-const appendElementContainer = document.getElementById("append-element-container")
 
 function getAppendedElements() {
   return reduce((accum, key) => {
@@ -23,7 +22,10 @@ export class ManageAppendedComponents extends React.Component {
   }
 
   updateAppendElement(content) {
-    appendedElements[this.appendElementId] = content
+    appendedElements[this.appendElementId] = {
+      content,
+      appendElementContainer: this.props.appendElementContainer || "#append-element-container",
+    }
     this.renderAppendedElements()
   }
 
@@ -33,7 +35,22 @@ export class ManageAppendedComponents extends React.Component {
   }
 
   renderAppendedElements() {
-    ReactDOM.render((<span>{getAppendedElements()}</span>), appendElementContainer)
+    const elementsToAppend = getAppendedElements()
+    const elementContainers = compose(
+      uniq,
+      map((container) => container.appendElementContainer),
+    )(elementsToAppend)
+
+    map((elementContainer) => {
+      const matching = filter(propEq("appendElementContainer", elementContainer),  elementsToAppend)
+      const content = reduce((accum, val) => {
+        accum.push(val.content)
+        return accum
+      }, [], matching)
+      console.log(elementContainer)
+      ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
+    }, elementContainers)
+
   }
 
 }

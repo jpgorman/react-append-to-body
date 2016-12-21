@@ -11,15 +11,20 @@ export function Modal({children}) {
 
 import {
   componentWillAppendToBody
-} from "../src/append-to-body"
+} from "../src/"
 
 const AppendedModal = componentWillAppendToBody(Modal)
+const AppendeOtherModal = componentWillAppendToBody(Modal)
+const AppendeAnOtherModal = componentWillAppendToBody(Modal)
 
 const App = function() {
   return (
     <div>
       Some content on my page
-      <AppendedModal>My Model</AppendedModal>
+      <AppendedModal appendElementContainer={"#other-element-container"}>My First Model</AppendedModal>
+      <AppendedModal>My Second Model</AppendedModal>
+      <AppendeAnOtherModal>My Third Model</AppendeAnOtherModal>
+      <AppendeAnOtherModal appendElementContainer={"#other-element-container"}>My Fourth Model</AppendeAnOtherModal>
     </div>
   )
 }

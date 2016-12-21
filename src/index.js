@@ -8,11 +8,11 @@ export function componentWillAppendToBody(NewComponent) {
   return class AppendedComponent extends ManageAppendedComponents {
     constructor(props) {
       super(props)
-      this.uniqueId = uuid.v1()
-      this.setAppendElementId(this.uniqueId)
     }
 
     componentDidMount() {
+      this.uniqueId = uuid.v1()
+      this.setAppendElementId(this.uniqueId)
       this.update()
     }
 
