@@ -1,5 +1,7 @@
 node_modules
 npm-debug.log
+dist
+.node-version
 
 # OS generated files #
 ######################
