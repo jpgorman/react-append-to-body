@@ -26,18 +26,18 @@ function mockRender(Component) {
 }
 
 
-  const mockAppRoot = document.createElement("div")
-  mockAppRoot.setAttribute("id", "app")
-  const mockAppendRoot = document.createElement("div")
-  mockAppendRoot.setAttribute("id", "append-element-container")
-  document.body.appendChild(mockAppRoot)
-  document.body.appendChild(mockAppendRoot)
-
 describe("invert-animation plugin", () => {
 
   describe("componentWillAppendToBody", () => {
-    let mockAppRoot
-    let mockAppendRoot
+
+    beforeEach(() => {
+      const mockAppRoot = document.createElement("div")
+      mockAppRoot.setAttribute("id", "app")
+      const mockAppendRoot = document.createElement("div")
+      mockAppendRoot.setAttribute("id", "append-element-container")
+      document.body.appendChild(mockAppRoot)
+      document.body.appendChild(mockAppendRoot)
+    })
 
     afterEach(() => {
       unMountComponentWillAppendToBody()
