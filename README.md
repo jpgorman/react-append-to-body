@@ -10,7 +10,7 @@
 npm i react-append-to-body --save-dev
 ```
 
-#Example
+#Use
 ```js
 import {componentWillAppendToBody} from "react-append-to-body"
 
@@ -23,14 +23,14 @@ function MyComponent({children}) {
   )
 }
 
-const AppendedModal = componentWillAppendToBody(Modal)
+const AppendedMyComponent = componentWillAppendToBody(MyComponent)
 
 class MyApp extends React.Component {
   render () {
     return (
       <div>
         Some content on my page // this content will be rendered in the main app
-        <AppendedModal>The content for my appended component</AppendedModal> // this content will be rendered outside of the main app
+        <AppendedMyComponent>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
       </div>
     )
   }
@@ -52,7 +52,7 @@ class MyApp extends React.Component {
 </html>
 ```
 
-## Appending to a named DOM node
+### Appending to a named DOM node
 
 ```html
 /* template */
@@ -69,17 +69,29 @@ class MyApp extends React.Component {
 ```
 
 ```js
-const AppendedModal = componentWillAppendToBody(Modal)
+const AppendedMyComponent = componentWillAppendToBody(MyComponent)
 class MyApp extends React.Component {
   render () {
     return (
       <div>
         Some content on my page // this content will be rendered in the main app
-        <AppendedModal appendElementContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedModal> // this content will be rendered outside of the main app
+        <AppendedMyComponent appendElementContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
       </div>
     )
   }
 }
 ```
+
+## API
+
+`appendElementContainer` a string that should contain a selector that will work with document.querySelector [MDN]: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+
+
+## Tests
+`npm run test`
+`npm run test-watch`
+
+# Demo
+`npm run demo`
 
 See [React] docs for examples for your environment.

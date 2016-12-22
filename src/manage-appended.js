@@ -1,4 +1,4 @@
-import React from "react"
+import React, {PropTypes} from "react"
 import ReactDOM from "react-dom"
 import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
 
@@ -15,6 +15,12 @@ export function manageAppendedComponents () {
   }
 
   return class ManageAppendedComponents extends React.Component {
+
+    static get propTypes() {
+      return {
+        appendElementContainer: PropTypes.string,
+      }
+    }
 
     constructor(props) {
       super(props)
@@ -43,7 +49,7 @@ export function manageAppendedComponents () {
       const elementsToAppend = getAppendedElements()
       const elementContainers = compose(
         uniq,
-        map((container) => container.appendElementContainer),
+        map((container) => container.appendElementContainer)
       )(elementsToAppend)
 
       map((elementContainer) => {

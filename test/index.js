@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "jsdom-global/register"
 import chai from "chai"
 import React from "react"

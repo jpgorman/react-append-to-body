@@ -1,0 +1,41 @@
+module.exports = {
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "mocha": true,
+        "node": true,
+        "es6": true
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "classes": true,
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "react/display-name": 1,
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "double",
+            { "allowTemplateLiterals": true }
+        ],
+        "semi": [
+            "error",
+            "never"
+        ]
+    }
+};

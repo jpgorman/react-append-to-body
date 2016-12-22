@@ -1,6 +1,5 @@
-
-import React from "react"
 import uuid from "node-uuid"
+import React from "react"
 import {manageAppendedComponents} from "./manage-appended"
 let ManageAppendedComponents = manageAppendedComponents()
 
