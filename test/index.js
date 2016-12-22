@@ -3,7 +3,7 @@ import chai from "chai"
 import React from "react"
 import ReactDOM from "react-dom"
 const expect = chai.expect
-import {componentWillAppendToBody} from "../src/index"
+import {componentWillAppendToBody, unMountComponentWillAppendToBody} from "../src/index"
 
 function MockModal({children}) {
   return (
@@ -40,6 +40,7 @@ describe("invert-animation plugin", () => {
     let mockAppendRoot
 
     afterEach(() => {
+      unMountComponentWillAppendToBody()
       ReactDOM.unmountComponentAtNode(document.querySelector("#app"))
       ReactDOM.unmountComponentAtNode(document.querySelector("#append-element-container"))
     })

@@ -1,7 +1,12 @@
 
 import React from "react"
 import uuid from "node-uuid"
-import {ManageAppendedComponents} from "./manage-appended"
+import {manageAppendedComponents} from "./manage-appended"
+let ManageAppendedComponents = manageAppendedComponents()
+
+export function unMountComponentWillAppendToBody() {
+  ManageAppendedComponents = manageAppendedComponents()
+}
 
 export function componentWillAppendToBody(NewComponent) {
 

@@ -2,57 +2,60 @@ import React from "react"
 import ReactDOM from "react-dom"
 import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
 
-const appendedElements = {}
 
-function getAppendedElements() {
-  return reduce((accum, key) => {
-    accum.push(appendedElements[key])
-    return accum
-  }, [], keys(appendedElements))
-}
+export function manageAppendedComponents () {
 
-export class ManageAppendedComponents extends React.Component {
+  const appendedElements = {}
 
-  constructor(props) {
-    super(props)
+  function getAppendedElements() {
+    return reduce((accum, key) => {
+      accum.push(appendedElements[key])
+      return accum
+    }, [], keys(appendedElements))
   }
 
-  setAppendElementId(id) {
-    this.appendElementId = id
-  }
+  return class ManageAppendedComponents extends React.Component {
 
-  updateAppendElement(content) {
-    appendedElements[this.appendElementId] = {
-      content,
-      appendElementContainer: this.props.appendElementContainer || "#append-element-container",
+    constructor(props) {
+      super(props)
     }
-    this.renderAppendedElements()
+
+    setAppendElementId(id) {
+      this.appendElementId = id
+    }
+
+    updateAppendElement(content) {
+      appendedElements[this.appendElementId] = {
+        content,
+        appendElementContainer: this.props.appendElementContainer || "#append-element-container",
+      }
+      this.renderAppendedElements()
+    }
+
+    deleteAppendElement(key) {
+      const currentElement = appendedElements[key]
+      delete appendedElements[key]
+      ReactDOM.unmountComponentAtNode(document.querySelector(currentElement.appendElementContainer))
+      this.renderAppendedElements()
+    }
+
+    renderAppendedElements() {
+      const elementsToAppend = getAppendedElements()
+      const elementContainers = compose(
+        uniq,
+        map((container) => container.appendElementContainer),
+      )(elementsToAppend)
+
+      map((elementContainer) => {
+        const matching = filter(propEq("appendElementContainer", elementContainer),  elementsToAppend)
+        const content = reduce((accum, val) => {
+          accum.push(val.content)
+          return accum
+        }, [], matching)
+
+        ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
+      }, elementContainers)
+
+    }
   }
-
-  deleteAppendElement(key) {
-    const currentElement = appendedElements[key]
-    delete appendedElements[key]
-    ReactDOM.unmountComponentAtNode(document.querySelector(currentElement.appendElementContainer))
-    this.renderAppendedElements()
-  }
-
-  renderAppendedElements() {
-    const elementsToAppend = getAppendedElements()
-    const elementContainers = compose(
-      uniq,
-      map((container) => container.appendElementContainer),
-    )(elementsToAppend)
-
-    map((elementContainer) => {
-      const matching = filter(propEq("appendElementContainer", elementContainer),  elementsToAppend)
-      const content = reduce((accum, val) => {
-        accum.push(val.content)
-        return accum
-      }, [], matching)
-
-      ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
-    }, elementContainers)
-
-  }
-
 }
