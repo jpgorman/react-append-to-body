@@ -2,6 +2,13 @@ import React, {PropTypes} from "react"
 import ReactDOM from "react-dom"
 import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
 
+function addContainerToDOM() {
+  if(!document.querySelector("#append-element-container")) {
+    const container = document.createElement("div")
+    container.setAttribute("id", "append-element-container")
+    document.body.appendChild(container)
+  }
+}
 
 export function manageAppendedComponents () {
 
@@ -24,6 +31,9 @@ export function manageAppendedComponents () {
 
     constructor(props) {
       super(props)
+      if(!props.appendElementContainer) {
+        addContainerToDOM()
+      }
     }
 
     setAppendElementId(id) {

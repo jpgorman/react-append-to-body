@@ -4,7 +4,10 @@ import chai from "chai"
 import React from "react"
 import ReactDOM from "react-dom"
 const expect = chai.expect
-import {componentWillAppendToBody, unMountComponentWillAppendToBody} from "../src/index"
+import {
+  componentWillAppendToBody,
+  unMountComponentWillAppendToBody,
+} from "../src/index"
 
 function MockModal({children}) {
   return (
@@ -27,23 +30,30 @@ function mockRender(Component) {
 }
 
 
-describe("invert-animation plugin", () => {
+describe("react-append-to-body", () => {
 
   describe("componentWillAppendToBody", () => {
 
     beforeEach(() => {
       const mockAppRoot = document.createElement("div")
       mockAppRoot.setAttribute("id", "app")
-      const mockAppendRoot = document.createElement("div")
-      mockAppendRoot.setAttribute("id", "append-element-container")
       document.body.appendChild(mockAppRoot)
-      document.body.appendChild(mockAppendRoot)
     })
 
     afterEach(() => {
+      document.body.innerHTML = ""
       unMountComponentWillAppendToBody()
-      ReactDOM.unmountComponentAtNode(document.querySelector("#app"))
-      ReactDOM.unmountComponentAtNode(document.querySelector("#append-element-container"))
+    })
+
+    it("should be a function", () => {
+      expect(componentWillAppendToBody).to.be.instanceOf(Function)
+    })
+
+    it("should attach default container DOM node to the document if non-exists", () => {
+      expect(document.querySelector("#append-element-container")).to.eq(null)
+      const AppendedModal = componentWillAppendToBody(MockModal)
+      mockRender(<AppendedModal>foo</AppendedModal>)
+      expect(document.querySelector("#append-element-container")).to.not.eq(null)
     })
 
     it("should append component to 'append-element-container' by default", () => {
@@ -67,6 +77,14 @@ describe("invert-animation plugin", () => {
       const expected = `<span data-reactroot=""><div class="modal__container">foo</div><div class="modal__container">bar</div></span>`
 
       expect(actual).to.eql(expected)
+
+    })
+
+    it("should NOT attach default container DOM node to the document if `appendElementContainer` prop is supplied", () => {
+      expect(document.querySelector("#append-element-container")).to.eq(null)
+      const AppendedModal = componentWillAppendToBody(MockModal)
+      mockRender(<AppendedModal appendElementContainer={"#app"}>foo</AppendedModal>)
+      expect(document.querySelector("#append-element-container")).to.eq(null)
 
     })
 
