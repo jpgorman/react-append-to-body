@@ -54,7 +54,43 @@ class MyApp extends React.Component {
 </html>
 ```
 
+```html
+/* output */
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+</head>
+<body class="body">
+  <div id="my-app">
+    <div>
+    // this content will be rendered in the main app
+    Some content on my page
+    </div>
+  </div>
+  <div id="append-element-container">
+    <div class="myClassName">
+      The content for my appended component
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</html>
+```
+
 ### Appending to a named DOM node
+```js
+const AppendedMyComponent = componentWillAppendToBody(MyComponent)
+class MyApp extends React.Component {
+  render () {
+    return (
+      <div>
+        Some content on my page // this content will be rendered in the main app
+        <AppendedMyComponent appendElementContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
+      </div>
+    )
+  }
+}
+```
 
 ```html
 /* template */
@@ -71,18 +107,27 @@ class MyApp extends React.Component {
 </html>
 ```
 
-```js
-const AppendedMyComponent = componentWillAppendToBody(MyComponent)
-class MyApp extends React.Component {
-  render () {
-    return (
-      <div>
-        Some content on my page // this content will be rendered in the main app
-        <AppendedMyComponent appendElementContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
-      </div>
-    )
-  }
-}
+```html
+/* output */
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+</head>
+<body class="body">
+  <div id="my-app">
+    <div>
+    // this content will be rendered in the main app
+    Some content on my page
+    </div>
+  </div>
+  <div id="my-named-element-to-append-with">
+    <div class="myClassName">
+      The content for my appended component
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</html>
 ```
 
 ## API
