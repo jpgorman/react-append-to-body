@@ -29,8 +29,11 @@ class MyApp extends React.Component {
   render () {
     return (
       <div>
-        Some content on my page // this content will be rendered in the main app
-        <AppendedMyComponent>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
+        // this content will be rendered in the main app
+        Some content on my page
+
+        // this content will be rendered outside of the main app
+        <AppendedMyComponent>The content for my appended component</AppendedMyComponent>
       </div>
     )
   }
@@ -47,7 +50,6 @@ class MyApp extends React.Component {
 </head>
 <body class="body">
   <div id="my-app"></div>
-  <div id="append-element-container"></div>
   <script src="/app.js"></script>
 </html>
 ```
@@ -63,6 +65,7 @@ class MyApp extends React.Component {
 </head>
 <body class="body">
   <div id="my-app"></div>
+  /* dom node that content will be appended to */
   <div id="my-named-element-to-append-with"></div>
   <script src="/app.js"></script>
 </html>
@@ -89,7 +92,6 @@ class MyApp extends React.Component {
 
 ## Tests
 `npm run test`
-`npm run test-watch`
 
 # Demo
 `npm run demo`
