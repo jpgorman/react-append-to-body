@@ -2,12 +2,18 @@ import React, {PropTypes} from "react"
 import ReactDOM from "react-dom"
 import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
 
-function addContainerToDOM() {
+function addContainer() {
   if(!document.querySelector("#append-element-container")) {
     const container = document.createElement("div")
     container.setAttribute("id", "append-element-container")
+    container.setAttribute("class", "append-element-container")
     document.body.appendChild(container)
   }
+}
+
+function removeContainer() {
+  if(document.querySelector("#append-element-container"))
+    document.body.removeChild(document.querySelector("#append-element-container"))
 }
 
 export function manageAppendedComponents () {
@@ -26,13 +32,14 @@ export function manageAppendedComponents () {
     static get propTypes() {
       return {
         appendElementContainer: PropTypes.string,
+        className: PropTypes.string,
       }
     }
 
     constructor(props) {
       super(props)
       if(!props.appendElementContainer) {
-        addContainerToDOM()
+        addContainer()
       }
     }
 
@@ -53,6 +60,10 @@ export function manageAppendedComponents () {
       delete appendedElements[key]
       ReactDOM.unmountComponentAtNode(document.querySelector(currentElement.appendElementContainer))
       this.renderAppendedElements()
+
+      if(keys(appendedElements).length === 0){
+        removeContainer()
+      }
     }
 
     renderAppendedElements() {
@@ -68,7 +79,6 @@ export function manageAppendedComponents () {
           accum.push(val.content)
           return accum
         }, [], matching)
-
         ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
       }, elementContainers)
 

@@ -1,15 +1,12 @@
-var path = require("path")
-var webpack = require("webpack")
-
 module.exports = {
-
   entry: {
-    homepage: "./demo/index.js",
+    simple: "./demo/simple.js",
+    complex: "./demo/complex.js",
   },
 
   output: {
     publicPath: "/",
-    filename: "app.js",
+    filename: "[name].entry.js",
   },
 
   debug: true,

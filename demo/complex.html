@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <title>Complex Demo</title>
+  <style>
+    .append-element-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: flex;
+    }
+    .other-element-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      width: 341px;
+      height: 265px;
+    }
+  </style>
+</head>
+<body class="body">
+  <div id="app"></div>
+  <div id="other-element-container" class="other-element-container"></div>
+  <script src="/complex.entry.js"></script>
+</html>
