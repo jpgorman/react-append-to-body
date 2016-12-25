@@ -1,31 +1,18 @@
 import React, {PropTypes} from "react"
 import ReactDOM from "react-dom"
-import {keys, reduce, map, propEq, compose, uniq, filter} from "ramda"
+import {keys, reduce, map, propEq, prop, compose, uniq, filter, partial} from "ramda"
+import {addContainer, removeContainer} from "./update-dom"
 
-function addContainer() {
-  if(!document.querySelector("#append-element-container")) {
-    const container = document.createElement("div")
-    container.setAttribute("id", "append-element-container")
-    container.setAttribute("class", "append-element-container")
-    document.body.appendChild(container)
-  }
-}
-
-function removeContainer() {
-  if(document.querySelector("#append-element-container"))
-    document.body.removeChild(document.querySelector("#append-element-container"))
+function covertToArray(collection) {
+  return reduce((accum, key) => {
+    accum.push(collection[key])
+    return accum
+  }, [], keys(collection))
 }
 
 export function manageAppendedComponents () {
 
   const appendedElements = {}
-
-  function getAppendedElements() {
-    return reduce((accum, key) => {
-      accum.push(appendedElements[key])
-      return accum
-    }, [], keys(appendedElements))
-  }
 
   return class ManageAppendedComponents extends React.Component {
 
@@ -38,6 +25,9 @@ export function manageAppendedComponents () {
 
     constructor(props) {
       super(props)
+      this.appendToEachContainer = this.appendToEachContainer.bind(this)
+      this.uniqueListOfContainers = this.uniqueListOfContainers.bind(this)
+      this.appendToDOM = this.appendToDOM.bind(this)
       if(!props.appendElementContainer) {
         addContainer()
       }
@@ -66,21 +56,31 @@ export function manageAppendedComponents () {
       }
     }
 
-    renderAppendedElements() {
-      const elementsToAppend = getAppendedElements()
-      const elementContainers = compose(
+    uniqueListOfContainers() {
+      return compose(
         uniq,
-        map((container) => container.appendElementContainer)
-      )(elementsToAppend)
+        map(prop("appendElementContainer"))
+      )(covertToArray(appendedElements))
+    }
 
-      map((elementContainer) => {
-        const matching = filter(propEq("appendElementContainer", elementContainer),  elementsToAppend)
-        const content = reduce((accum, val) => {
+    appendToDOM(container, content) {
+      ReactDOM.render((<span>{content}</span>), document.querySelector(container))
+    }
+
+    appendToEachContainer(elementContainer) {
+      compose(
+        partial(this.appendToDOM, [elementContainer]),
+        reduce((accum, val) => {
           accum.push(val.content)
           return accum
-        }, [], matching)
-        ReactDOM.render((<span>{content}</span>), document.querySelector(elementContainer))
-      }, elementContainers)
+        }, []),
+        filter(propEq("appendElementContainer", elementContainer))
+      )(covertToArray(appendedElements))
+    }
+
+    renderAppendedElements() {
+
+      map(this.appendToEachContainer, this.uniqueListOfContainers())
 
     }
   }
