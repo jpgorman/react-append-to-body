@@ -1,4 +1,4 @@
-export function addContainer() {
+export function addDefaultContainer() {
   if(!document.querySelector("#subtree-container")) {
     const container = document.createElement("div")
     container.setAttribute("id", "subtree-container")
@@ -7,7 +7,7 @@ export function addContainer() {
   }
 }
 
-export function removeContainer() {
+export function removeDefaultContainer() {
   if(document.querySelector("#subtree-container"))
     document.body.removeChild(document.querySelector("#subtree-container"))
 }

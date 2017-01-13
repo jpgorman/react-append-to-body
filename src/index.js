@@ -1,22 +1,39 @@
 import uuid from "node-uuid"
-import React from "react"
+import React, {PropTypes} from "react"
 import {componentRegistry} from "./component-registry"
-let ComponentSubtreeRegistry = componentRegistry()
+import {addDefaultContainer} from "./update-dom"
+let componentSubtreeRegistry = componentRegistry()
 
 export function unMountComponentWillAppendToBody() {
-  ComponentSubtreeRegistry = componentRegistry()
+  componentSubtreeRegistry = componentRegistry()
 }
 
 export function componentWillAppendToBody(Component) {
 
-  return class ComponentSubtree extends ComponentSubtreeRegistry {
+  return class ComponentSubtree extends React.Component {
+
+    static get defaultProps() {
+      return {
+        subtreeContainer: "#subtree-container",
+      }
+    }
+
+    static get propTypes() {
+      return {
+        subtreeContainer: PropTypes.string,
+        className: PropTypes.string,
+      }
+    }
     constructor(props) {
       super(props)
+      if(props.subtreeContainer === "#subtree-container") {
+        addDefaultContainer()
+      }
     }
 
     componentDidMount() {
       this.uniqueId = uuid.v1()
-      this.setSubtreeId(this.uniqueId)
+      componentSubtreeRegistry.setSubtreeId(this.uniqueId)
       this.add()
     }
 
@@ -25,11 +42,11 @@ export function componentWillAppendToBody(Component) {
     }
 
     componentWillUnmount() {
-      this.deleteElement(this.uniqueId)
+      componentSubtreeRegistry.deleteElement(this.uniqueId)
     }
 
     update() {
-      this.updateElement(
+      componentSubtreeRegistry.updateElement(
         <Component
           key={this.uniqueId}
           {...this.props}
@@ -38,12 +55,12 @@ export function componentWillAppendToBody(Component) {
     }
 
     add() {
-      this.addElement(
+      componentSubtreeRegistry.addElement(
         <Component
           key={this.uniqueId}
           {...this.props}
         />
-      )
+      , document.querySelector(this.props.subtreeContainer))
     }
 
     render() {
