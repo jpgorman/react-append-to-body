@@ -7,7 +7,7 @@ export function unMountComponentWillAppendToBody() {
   ManageAppendedComponents = manageAppendedComponents()
 }
 
-export function componentWillAppendToBody(NewComponent) {
+export function componentWillAppendToBody(Component) {
 
   return class AppendedComponent extends ManageAppendedComponents {
     constructor(props) {
@@ -17,7 +17,7 @@ export function componentWillAppendToBody(NewComponent) {
     componentDidMount() {
       this.uniqueId = uuid.v1()
       this.setAppendElementId(this.uniqueId)
-      this.update()
+      this.add()
     }
 
     componentDidUpdate() {
@@ -25,12 +25,21 @@ export function componentWillAppendToBody(NewComponent) {
     }
 
     componentWillUnmount() {
-      this.deleteAppendElement(this.uniqueId)
+      this.deleteElement(this.uniqueId)
     }
 
     update() {
-      this.updateAppendElement(
-        <NewComponent
+      this.updateElement(
+        <Component
+          key={this.uniqueId}
+          {...this.props}
+        />
+      )
+    }
+
+    add() {
+      this.addElement(
+        <Component
           key={this.uniqueId}
           {...this.props}
         />
