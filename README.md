@@ -85,7 +85,7 @@ class MyApp extends React.Component {
     return (
       <div>
         Some content on my page // this content will be rendered in the main app
-        <AppendedMyComponent appendElementContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
+        <AppendedMyComponent subtreeContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
       </div>
     )
   }
@@ -132,7 +132,7 @@ class MyApp extends React.Component {
 
 ## API
 
-`appendElementContainer` a string that should contain a selector that will work with document.querySelector [MDN]: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+`subtreeContainer` a string that should contain a selector that will work with document.querySelector [MDN]: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
 
 
 ## Tests
