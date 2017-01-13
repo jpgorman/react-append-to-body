@@ -50,21 +50,21 @@ describe("react-append-to-body", () => {
     })
 
     it("should attach default container DOM node to the document if non-exists", () => {
-      expect(document.querySelector("#append-element-container")).to.eq(null)
+      expect(document.querySelector("#subtree-container")).to.eq(null)
       const AppendedModal = componentWillAppendToBody(MockModal)
       mockRender(<AppendedModal>foo</AppendedModal>)
-      expect(document.querySelector("#append-element-container")).to.not.eq(null)
+      expect(document.querySelector("#subtree-container")).to.not.eq(null)
     })
 
-    it("should append component to 'append-element-container' by default", () => {
+    it("should append component to 'subtree-container' by default", () => {
       const AppendedModal = componentWillAppendToBody(MockModal)
       mockRender(<AppendedModal>foo</AppendedModal>)
-      const actual = document.getElementById("append-element-container").innerHTML
+      const actual = document.getElementById("subtree-container").innerHTML
       const expected = `<span data-reactroot=""><div class="modal__container">foo</div></span>`
       expect(actual).to.eql(expected)
     })
 
-    it("should append multiple instances of component to 'append-element-container' by default", () => {
+    it("should append multiple instances of component to 'subtree-container' by default", () => {
       const FirstAppendedModal = componentWillAppendToBody(MockModal)
       const SecondAppendedModal = componentWillAppendToBody(MockModal)
       mockRender(
@@ -73,24 +73,24 @@ describe("react-append-to-body", () => {
           <SecondAppendedModal>bar</SecondAppendedModal>
         </MockApp>
       )
-      const actual = document.querySelector("#append-element-container").innerHTML
+      const actual = document.querySelector("#subtree-container").innerHTML
       const expected = `<span data-reactroot=""><div class="modal__container">foo</div><div class="modal__container">bar</div></span>`
 
       expect(actual).to.eql(expected)
 
     })
 
-    it("should NOT attach default container DOM node to the document if `appendElementContainer` prop is supplied", () => {
-      expect(document.querySelector("#append-element-container")).to.eq(null)
+    it("should NOT attach default container DOM node to the document if `subtreeContainer` prop is supplied", () => {
+      expect(document.querySelector("#subtree-container")).to.eq(null)
       const AppendedModal = componentWillAppendToBody(MockModal)
-      mockRender(<AppendedModal appendElementContainer={"#app"}>foo</AppendedModal>)
-      expect(document.querySelector("#append-element-container")).to.eq(null)
+      mockRender(<AppendedModal subtreeContainer={"#app"}>foo</AppendedModal>)
+      expect(document.querySelector("#subtree-container")).to.eq(null)
 
     })
 
-    it("should append component to name DOM Container when supplied via 'appendElementContainer' prop", () => {
+    it("should append component to name DOM Container when supplied via 'subtreeContainer' prop", () => {
       const AppendedModal = componentWillAppendToBody(MockModal)
-      mockRender(<AppendedModal appendElementContainer={"#app"}>foo</AppendedModal>)
+      mockRender(<AppendedModal subtreeContainer={"#app"}>foo</AppendedModal>)
       const actual = document.getElementById("app").innerHTML
       const expected = `<span data-reactroot=""><div class="modal__container">foo</div></span>`
       expect(actual).to.eql(expected)

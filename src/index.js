@@ -1,22 +1,22 @@
 import uuid from "node-uuid"
 import React from "react"
-import {manageAppendedComponents} from "./manage-appended"
-let ManageAppendedComponents = manageAppendedComponents()
+import {componentRegistry} from "./component-registry"
+let ComponentSubtreeRegistry = componentRegistry()
 
 export function unMountComponentWillAppendToBody() {
-  ManageAppendedComponents = manageAppendedComponents()
+  ComponentSubtreeRegistry = componentRegistry()
 }
 
 export function componentWillAppendToBody(Component) {
 
-  return class AppendedComponent extends ManageAppendedComponents {
+  return class ComponentSubtree extends ComponentSubtreeRegistry {
     constructor(props) {
       super(props)
     }
 
     componentDidMount() {
       this.uniqueId = uuid.v1()
-      this.setAppendElementId(this.uniqueId)
+      this.setSubtreeId(this.uniqueId)
       this.add()
     }
 
