@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react"
 import ReactDOM from "react-dom"
-import {keys, reduce, map, propEq, prop, compose, uniq, filter, partial} from "ramda"
-import {addContainer, removeContainer} from "./update-dom"
+import {keys, reduce, find, propEq, clone} from "ramda"
+import {removeDefaultContainer} from "./update-dom"
+import {renderInContainers} from "./render-in-containers"
 
 function covertToArray(collection) {
   return reduce((accum, key) => {
@@ -14,79 +14,35 @@ export function componentRegistry () {
 
   const registry = {}
 
-  return class ComponentSubtreeRegistry extends React.Component {
-
-    static get propTypes() {
-      return {
-        subtreeContainer: PropTypes.string,
-        className: PropTypes.string,
-      }
-    }
-
-    constructor(props) {
-      super(props)
-      this.injectSubtree = this.injectSubtree.bind(this)
-      this.uniqueContainers = this.uniqueContainers.bind(this)
-      this.appendToDOM = this.appendToDOM.bind(this)
-      if(!props.subtreeContainer) {
-        addContainer()
-      }
-    }
-
+  return {
     setSubtreeId(id) {
       this.subtreeId = id
-    }
+    },
 
-    addElement(content) {
+    addElement(content, container) {
       registry[this.subtreeId] = {
         content,
-        subtreeContainer: document.querySelector(this.props.subtreeContainer || "#subtree-container"),
+        subtreeContainer: container,
       }
-      this.renderSubtrees()
-    }
+      renderInContainers(registry)
+    },
 
     updateElement(content) {
       registry[this.subtreeId].content = content
-      this.renderSubtrees()
-    }
+      renderInContainers(registry)
+    },
 
     deleteElement(key) {
       const currentElement = registry[key]
+      const containerForCurrentElement = clone(currentElement).subtreeContainer
       delete registry[key]
       ReactDOM.unmountComponentAtNode(currentElement.subtreeContainer)
-      this.renderSubtrees()
+      renderInContainers(registry)
 
-      if(keys(registry).length === 0){
-        removeContainer()
+      const containerHasElements = find(propEq("subtreeContainer", containerForCurrentElement))(covertToArray(registry))
+      if(!containerHasElements && containerForCurrentElement.id ==="subtree-container"){
+        removeDefaultContainer(containerForCurrentElement) // delete per container
       }
-    }
-
-    uniqueContainers() {
-      return compose(
-        uniq,
-        map(prop("subtreeContainer"))
-      )(covertToArray(registry))
-    }
-
-    appendToDOM(container, content) {
-      ReactDOM.render((<span>{content}</span>), container)
-    }
-
-    injectSubtree(elementContainer) {
-      compose(
-        partial(this.appendToDOM, [elementContainer]),
-        reduce((accum, val) => {
-          accum.push(val.content)
-          return accum
-        }, []),
-        filter(propEq("subtreeContainer", elementContainer))
-      )(covertToArray(registry))
-    }
-
-    renderSubtrees() {
-
-      map(this.injectSubtree, this.uniqueContainers())
-
     }
   }
 }
