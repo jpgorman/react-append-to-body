@@ -40,7 +40,7 @@ export function manageAppendedComponents () {
     updateAppendElement(content) {
       appendedElements[this.appendElementId] = {
         content,
-        appendElementContainer: this.props.appendElementContainer || "#append-element-container",
+        appendElementContainer: document.querySelector(this.props.appendElementContainer || "#append-element-container"),
       }
       this.renderAppendedElements()
     }
@@ -48,7 +48,7 @@ export function manageAppendedComponents () {
     deleteAppendElement(key) {
       const currentElement = appendedElements[key]
       delete appendedElements[key]
-      ReactDOM.unmountComponentAtNode(document.querySelector(currentElement.appendElementContainer))
+      ReactDOM.unmountComponentAtNode(currentElement.appendElementContainer)
       this.renderAppendedElements()
 
       if(keys(appendedElements).length === 0){
@@ -64,7 +64,7 @@ export function manageAppendedComponents () {
     }
 
     appendToDOM(container, content) {
-      ReactDOM.render((<span>{content}</span>), document.querySelector(container))
+      ReactDOM.render((<span>{content}</span>), container)
     }
 
     appendToEachContainer(elementContainer) {
