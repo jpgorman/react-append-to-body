@@ -37,7 +37,7 @@ export function manageAppendedComponents () {
       this.appendElementId = id
     }
 
-    updateAppendElement(content) {
+    addElement(content) {
       appendedElements[this.appendElementId] = {
         content,
         appendElementContainer: document.querySelector(this.props.appendElementContainer || "#append-element-container"),
@@ -45,7 +45,12 @@ export function manageAppendedComponents () {
       this.renderAppendedElements()
     }
 
-    deleteAppendElement(key) {
+    updateElement(content) {
+      appendedElements[this.appendElementId].content = content
+      this.renderAppendedElements()
+    }
+
+    deleteElement(key) {
       const currentElement = appendedElements[key]
       delete appendedElements[key]
       ReactDOM.unmountComponentAtNode(currentElement.appendElementContainer)
