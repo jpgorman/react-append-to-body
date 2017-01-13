@@ -3,4 +3,4 @@
 --recursive
 --timeout 4000
 --colors
---compilers js:babel/register
+--compilers js:babel-register
