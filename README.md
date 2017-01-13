@@ -141,4 +141,6 @@ class MyApp extends React.Component {
 # Demo
 `npm run demo`
 
+Then open up your browser at http://localhost:8777
+
 See [React] docs for examples for your environment.
