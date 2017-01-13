@@ -24,7 +24,6 @@ export function componentWillAppendToBody(Component) {
         className: PropTypes.string,
       }
     }
-
     constructor(props) {
       super(props)
       if(props.subtreeContainer === "#subtree-container") {
