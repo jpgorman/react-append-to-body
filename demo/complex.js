@@ -50,7 +50,7 @@ class App extends React.Component {
         </AppendedModal>
       ),
       modalB: (
-        <AppendedModal appendElementContainer={"#other-element-container"}>
+        <AppendedModal subtreeContainer={"#other-element-container"}>
           <div>My Second Modal</div>
           <div><input onChange={this.handler} value={this.state.value} /></div>
           <div><button onClick={this.openModal.bind(null, "close")}>Close Modal</button></div>
