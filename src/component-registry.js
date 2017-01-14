@@ -19,29 +19,32 @@ export function componentRegistry () {
       this.subtreeId = id
     },
 
-    addElement(content, container) {
+    addElement(content, selector) {
       registry[this.subtreeId] = {
         content,
-        subtreeContainer: container,
+        subtreeContainer: document.querySelector(selector),
+        selector,
       }
       renderSubtree(registry)
     },
 
     updateElement(content) {
-      registry[this.subtreeId].content = content
-      renderSubtree(registry)
+      if(registry.hasOwnProperty(this.subtreeId)) {
+        registry[this.subtreeId].content = content
+        renderSubtree(registry)
+      }
     },
 
     deleteElement(key) {
       const currentElement = registry[key]
-      const containerForCurrentElement = clone(currentElement).subtreeContainer
+      const currentElementClone = clone(currentElement)
       delete registry[key]
-      ReactDOM.unmountComponentAtNode(currentElement.subtreeContainer)
+      ReactDOM.unmountComponentAtNode(currentElementClone.subtreeContainer)
       renderSubtree(registry)
 
-      const containerHasElements = find(propEq("subtreeContainer", containerForCurrentElement))(covertToArray(registry))
-      if(!containerHasElements && containerForCurrentElement.id ==="subtree-container"){
-        removeDefaultContainer(containerForCurrentElement) // delete per container
+      const containerHasElements = find(propEq("selector", currentElementClone.selector))(covertToArray(registry))
+      if(!containerHasElements && currentElementClone.selector ==="#subtree-container"){
+        removeDefaultContainer() // delete per container
       }
     }
   }

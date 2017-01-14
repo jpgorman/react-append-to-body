@@ -2,12 +2,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
+import {reject, equals, append, map} from "ramda"
 
 import {
   componentWillAppendToBody
 } from "../src/"
 
-const AppendedModal = componentWillAppendToBody(Modal)
+const AppendedModalA = componentWillAppendToBody(Modal)
+const AppendedModalB = componentWillAppendToBody(Modal)
+const AppendedModalC = componentWillAppendToBody(Modal)
 
 class App extends React.Component {
 
@@ -15,11 +18,11 @@ class App extends React.Component {
     super(props)
     this.state = {
       value: 0,
-      currentModal: null,
+      modals: [],
     }
     this.handler = this.handler.bind(this)
-    this.openModal = this.openModal.bind(this)
-    this.closeModal = this.closeModal.bind(this)
+    this.addModal = this.addModal.bind(this)
+    this.removeModal = this.removeModal.bind(this)
   }
 
   handler(event) {
@@ -28,15 +31,18 @@ class App extends React.Component {
     })
   }
 
-  openModal(name) {
+  addModal(name) {
+    const modals = append(name, this.state.modals)
     this.setState({
-      currentModal: name
+      modals,
     })
   }
 
-  closeModal() {
+  removeModal(name) {
+    console.log("remove", name)
+    const modals = reject(equals(name), this.state.modals)
     this.setState({
-      currentModal: null,
+      modals,
     })
   }
 
@@ -44,30 +50,38 @@ class App extends React.Component {
 
     const modalMap = {
       modalA: (
-        <AppendedModal handler={this.closeModal}>
+        <AppendedModalA>
           <div>My First Model</div>
-          <button onClick={this.closeModal}>Close Modal</button>
-        </AppendedModal>
+          <div id="inner-modal"></div>
+          <button onClick={this.removeModal.bind(null, "modalA")}>Close Modal</button>
+          <button key="btn3" onClick={this.addModal.bind(null, "modalC")}>Open Modal C in Modal B</button>
+        </AppendedModalA>
       ),
       modalB: (
-        <AppendedModal subtreeContainer={"#other-element-container"}>
+        <AppendedModalB subtreeContainer={"#other-element-container"}>
           <div>My Second Modal</div>
           <div><input onChange={this.handler} value={this.state.value} /></div>
-          <div><button onClick={this.openModal.bind(null, "close")}>Close Modal</button></div>
-        </AppendedModal>
+          <div><button onClick={this.removeModal.bind(null, "modalB")}>Close Modal</button></div>
+        </AppendedModalB>
+      ),
+      modalC: (
+        <AppendedModalC subtreeContainer={"#inner-modal"}>
+          <div>My Third Model</div>
+          <button onClick={this.removeModal.bind(null, "modalC")}>Close Modal</button>
+        </AppendedModalC>
       ),
     }
 
-    const buttons = !modalMap[this.state.currentModal] ? [
-      <button key="btn1" onClick={this.openModal.bind(null, "modalA")}>Open Modal A</button>,
-      <button key="btn2" onClick={this.openModal.bind(null, "modalB")}>Open Modal B</button>,
-    ] : null
+    const buttons = [
+      <button key="btn1" onClick={this.addModal.bind(null, "modalA")}>Open Modal A</button>,
+      <button key="btn2" onClick={this.addModal.bind(null, "modalB")}>Open Modal B</button>,
+    ]
 
     return (
       <div>
         <div>Some content on my page</div>
         <div>{buttons}</div>
-        {modalMap[this.state.currentModal] ? modalMap[this.state.currentModal] : null}
+        {map((name) => modalMap[name], this.state.modals)}
       </div>
     )
   }

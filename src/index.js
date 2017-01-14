@@ -60,7 +60,7 @@ export function componentWillAppendToBody(Component) {
           key={this.uniqueId}
           {...this.props}
         />
-      , document.querySelector(this.props.subtreeContainer))
+      , this.props.subtreeContainer)
     }
 
     render() {

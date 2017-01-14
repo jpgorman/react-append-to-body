@@ -6,11 +6,7 @@ export function Modal({children, handler}) {
     outer: {
       background: "rgba(255, 0, 0, 0.3)",
       display: "flex",
-      position: "absolute",
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
+      position: "relative",
     },
     inner: {
       margin: "auto",

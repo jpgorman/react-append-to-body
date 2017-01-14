@@ -7,7 +7,18 @@ export function addDefaultContainer() {
   }
 }
 
+export function containerExists(selector) {
+  return document.querySelector(selector)
+}
+
+export function removeContainer(selector) {
+  const node = document.querySelector(selector)
+  if (node.parentNode) {
+    node.parentNode.removeChild(node)
+  }
+}
+
 export function removeDefaultContainer() {
-  if(document.querySelector("#subtree-container"))
-    document.body.removeChild(document.querySelector("#subtree-container"))
+  if(containerExists("#subtree-container"))
+    removeContainer("#subtree-container")
 }

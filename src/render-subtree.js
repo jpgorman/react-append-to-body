@@ -2,11 +2,11 @@ import React from "react"
 import ReactDOM from "react-dom"
 import {reduce, map, prop, propEq, compose, filter, partial, keys, uniq} from "ramda"
 
-function covertToArray(collection) {
+function covertToArray(registry) {
   return reduce((accum, key) => {
-    accum.push(collection[key])
+    accum.push(registry[key])
     return accum
-  }, [], keys(collection))
+  }, [], keys(registry))
 }
 
 function uniqueContainers(registry) {
@@ -17,6 +17,8 @@ function uniqueContainers(registry) {
 }
 
 function appendToDOM(container, content) {
+  // TODO: check container exists in DOM before rendering
+
   ReactDOM.render((<span>{content}</span>), container)
 }
 
