@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom"
 import {keys, reduce, find, propEq, clone} from "ramda"
 import {removeDefaultContainer} from "./update-dom"
-import {renderInContainers} from "./render-in-containers"
+import {renderSubtree} from "./render-subtree"
 
 function covertToArray(collection) {
   return reduce((accum, key) => {
@@ -24,12 +24,12 @@ export function componentRegistry () {
         content,
         subtreeContainer: container,
       }
-      renderInContainers(registry)
+      renderSubtree(registry)
     },
 
     updateElement(content) {
       registry[this.subtreeId].content = content
-      renderInContainers(registry)
+      renderSubtree(registry)
     },
 
     deleteElement(key) {
@@ -37,7 +37,7 @@ export function componentRegistry () {
       const containerForCurrentElement = clone(currentElement).subtreeContainer
       delete registry[key]
       ReactDOM.unmountComponentAtNode(currentElement.subtreeContainer)
-      renderInContainers(registry)
+      renderSubtree(registry)
 
       const containerHasElements = find(propEq("subtreeContainer", containerForCurrentElement))(covertToArray(registry))
       if(!containerHasElements && containerForCurrentElement.id ==="subtree-container"){

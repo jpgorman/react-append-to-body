@@ -31,6 +31,6 @@ function injectSubtree(registry, elementContainer) {
   )(covertToArray(registry))
 }
 
-export function renderInContainers(registry) {
+export function renderSubtree(registry) {
   return map(injectSubtree.bind(null, registry), uniqueContainers(registry))
 }
