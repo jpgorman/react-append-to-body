@@ -33,7 +33,6 @@ export function componentWillAppendToBody(Component) {
 
     componentDidMount() {
       this.uniqueId = uuid.v1()
-      componentSubtreeRegistry.setSubtreeId(this.uniqueId)
       this.add()
     }
 
@@ -46,7 +45,7 @@ export function componentWillAppendToBody(Component) {
     }
 
     update() {
-      componentSubtreeRegistry.updateElement(
+      componentSubtreeRegistry.updateElement(this.uniqueId,
         <Component
           key={this.uniqueId}
           {...this.props}
@@ -55,7 +54,7 @@ export function componentWillAppendToBody(Component) {
     }
 
     add() {
-      componentSubtreeRegistry.addElement(
+      componentSubtreeRegistry.addElement(this.uniqueId,
         <Component
           key={this.uniqueId}
           {...this.props}
