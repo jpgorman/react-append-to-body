@@ -13,22 +13,25 @@ function covertToArray(registry) {
 function uniqueContainers(registry) {
   return compose(
     uniq,
-    map(prop("subtreeContainer"))
+    map(prop("selector"))
   )(covertToArray(registry))
 }
 
-function appendToDOM(container, arrayOfElements) {
-  ReactDOM.render((<span>{arrayOfElements}</span>), container)
+function appendToDOM(selector, arrayOfElements) {
+  const container = containerExists(selector)
+  if(container) {
+    ReactDOM.render((<span>{arrayOfElements}</span>), container)
+  }
 }
 
-function injectSubtree(registry, elementContainer) {
+function injectSubtree(registry, selector) {
   compose(
-    partial(appendToDOM, [elementContainer]),
+    partial(appendToDOM, [selector]),
     reduce((arrayOfElements, item) => {
       arrayOfElements.push(item.element)
       return arrayOfElements
     }, []),
-    filter(propEq("subtreeContainer", elementContainer))
+    filter(propEq("selector", selector))
   )(covertToArray(registry))
 }
 

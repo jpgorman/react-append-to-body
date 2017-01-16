@@ -1,5 +1,5 @@
 export function addDefaultContainer() {
-  if(!document.querySelector("#subtree-container")) {
+  if(!containerExists("#subtree-container")) {
     const container = document.createElement("div")
     container.setAttribute("id", "subtree-container")
     container.setAttribute("class", "subtree-container")
@@ -16,9 +16,4 @@ export function removeContainer(selector) {
   if (node.parentNode) {
     node.parentNode.removeChild(node)
   }
-}
-
-export function removeDefaultContainer() {
-  if(containerExists("#subtree-container"))
-    removeContainer("#subtree-container")
 }

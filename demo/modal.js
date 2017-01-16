@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react"
 
-export function Modal({children, handler}) {
+export function Modal({children}) {
   const style = {
     outer: {
       border: "1px solid rgba(255, 0, 0, 1)",
@@ -14,7 +14,7 @@ export function Modal({children, handler}) {
     }
   }
   return (
-    <div style={style.outer} onClick={handler}>
+    <div style={style.outer}>
       <div style={style.inner}>
         {children}
       </div>

@@ -8,9 +8,9 @@ import {
   componentWillAppendToBody
 } from "../src/"
 
-const AppendedModalA = componentWillAppendToBody(Modal)
-const AppendedModalB = componentWillAppendToBody(Modal)
-const AppendedModalC = componentWillAppendToBody(Modal)
+const PortalA = componentWillAppendToBody(Modal)
+const PortalB = componentWillAppendToBody(Modal)
+const PortalC = componentWillAppendToBody(Modal)
 
 class App extends React.Component {
 
@@ -49,25 +49,25 @@ class App extends React.Component {
 
     const modalMap = {
       modalA: (
-        <AppendedModalA>
+        <PortalA>
           <div>My First Model</div>
           <div id="inner-modal"></div>
           <button onClick={this.removeModal.bind(null, ["modalA", "modalC"])}>Close Modal</button>
           <button key="btn3" onClick={this.addModal.bind(null, "modalC")}>Open Modal C in Modal B</button>
-        </AppendedModalA>
+        </PortalA>
       ),
       modalB: (
-        <AppendedModalB subtreeContainer={"#other-element-container"}>
+        <PortalB subtreeContainer={"#other-element-container"}>
           <div>My Second Modal</div>
           <div><input onChange={this.handler} value={this.state.value} /></div>
           <div><button onClick={this.removeModal.bind(null, ["modalB"])}>Close Modal</button></div>
-        </AppendedModalB>
+        </PortalB>
       ),
       modalC: (
-        <AppendedModalC subtreeContainer={"#inner-modal"}>
+        <PortalC subtreeContainer={"#inner-modal"}>
           <div>My Third Model</div>
           <button onClick={this.removeModal.bind(null, ["modalC"])}>Close Modal</button>
-        </AppendedModalC>
+        </PortalC>
       ),
     }
 
