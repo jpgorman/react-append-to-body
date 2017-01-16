@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import {containerExists} from "./update-dom"
 import {reduce, map, prop, propEq, compose, filter, partial, keys, uniq} from "ramda"
 
 function covertToArray(registry) {
@@ -16,19 +17,15 @@ function uniqueContainers(registry) {
   )(covertToArray(registry))
 }
 
-function appendToDOM(container, content) {
-  // TODO: check container exists in DOM before rendering
-
-  ReactDOM.render((<span>{content}</span>), container)
+function appendToDOM(container, item) {
+  if(containerExists(item.selector)) {
+    ReactDOM.render((<span>{item.element}</span>), document.querySelector(item.selector))
+  }
 }
 
 function injectSubtree(registry, elementContainer) {
   compose(
-    partial(appendToDOM, [elementContainer]),
-    reduce((accum, val) => {
-      accum.push(val.content)
-      return accum
-    }, []),
+    map(partial(appendToDOM, [elementContainer])),
     filter(propEq("subtreeContainer", elementContainer))
   )(covertToArray(registry))
 }
