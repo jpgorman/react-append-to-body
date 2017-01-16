@@ -4,12 +4,10 @@ import React from "react"
 export function Modal({children, handler}) {
   const style = {
     outer: {
-      background: "rgba(255, 0, 0, 0.3)",
-      display: "flex",
+      border: "1px solid rgba(255, 0, 0, 1)",
       position: "relative",
     },
     inner: {
-      margin: "auto",
       padding: 100,
       background: "white",
       boxShadow: "2px 2px 3px 0px rgba(0,0,0,0.5)",

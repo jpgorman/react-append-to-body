@@ -2,7 +2,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
-import {reject, equals, append, map} from "ramda"
+import {reject, append, map, addIndex, contains} from "ramda"
 
 import {
   componentWillAppendToBody
@@ -38,9 +38,8 @@ class App extends React.Component {
     })
   }
 
-  removeModal(name) {
-    console.log("remove", name)
-    const modals = reject(equals(name), this.state.modals)
+  removeModal(names) {
+    const modals = reject((item) => contains(item, names), this.state.modals)
     this.setState({
       modals,
     })
@@ -53,7 +52,7 @@ class App extends React.Component {
         <AppendedModalA>
           <div>My First Model</div>
           <div id="inner-modal"></div>
-          <button onClick={this.removeModal.bind(null, "modalA")}>Close Modal</button>
+          <button onClick={this.removeModal.bind(null, ["modalA", "modalC"])}>Close Modal</button>
           <button key="btn3" onClick={this.addModal.bind(null, "modalC")}>Open Modal C in Modal B</button>
         </AppendedModalA>
       ),
@@ -61,13 +60,13 @@ class App extends React.Component {
         <AppendedModalB subtreeContainer={"#other-element-container"}>
           <div>My Second Modal</div>
           <div><input onChange={this.handler} value={this.state.value} /></div>
-          <div><button onClick={this.removeModal.bind(null, "modalB")}>Close Modal</button></div>
+          <div><button onClick={this.removeModal.bind(null, ["modalB"])}>Close Modal</button></div>
         </AppendedModalB>
       ),
       modalC: (
         <AppendedModalC subtreeContainer={"#inner-modal"}>
           <div>My Third Model</div>
-          <button onClick={this.removeModal.bind(null, "modalC")}>Close Modal</button>
+          <button onClick={this.removeModal.bind(null, ["modalC"])}>Close Modal</button>
         </AppendedModalC>
       ),
     }
@@ -81,7 +80,7 @@ class App extends React.Component {
       <div>
         <div>Some content on my page</div>
         <div>{buttons}</div>
-        {map((name) => modalMap[name], this.state.modals)}
+        {addIndex(map)((name, index) => <span key={index}>{modalMap[name]}</span>, this.state.modals)}
       </div>
     )
   }
