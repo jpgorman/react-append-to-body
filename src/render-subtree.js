@@ -17,15 +17,17 @@ function uniqueContainers(registry) {
   )(covertToArray(registry))
 }
 
-function appendToDOM(container, item) {
-  if(containerExists(item.selector)) {
-    ReactDOM.render((<span>{item.element}</span>), document.querySelector(item.selector))
-  }
+function appendToDOM(container, arrayOfElements) {
+  ReactDOM.render((<span>{arrayOfElements}</span>), container)
 }
 
 function injectSubtree(registry, elementContainer) {
   compose(
-    map(partial(appendToDOM, [elementContainer])),
+    partial(appendToDOM, [elementContainer]),
+    reduce((arrayOfElements, item) => {
+      arrayOfElements.push(item.element)
+      return arrayOfElements
+    }, []),
     filter(propEq("subtreeContainer", elementContainer))
   )(covertToArray(registry))
 }
