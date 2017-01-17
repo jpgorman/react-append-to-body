@@ -8,7 +8,7 @@
 
 #Installation
 ```sh
-npm i react-append-to-body --save-dev
+npm i react-append-to-body --save
 ```
 
 #Use
