@@ -2,7 +2,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
-import {reject, append, map, addIndex, contains} from "ramda"
+import {reject, append, map, addIndex, contains, __} from "ramda"
 
 import {
   componentWillAppendToBody
@@ -39,7 +39,7 @@ class App extends React.Component {
   }
 
   removeModal(names) {
-    const modals = reject((item) => contains(item, names), this.state.modals)
+    const modals = reject(contains(__, names), this.state.modals)
     this.setState({
       modals,
     })
