@@ -48,6 +48,8 @@
     "jsdom": "9.9.1",
     "jsdom-global": "2.1.0",
     "mocha": "^3.2.0",
+    "sinon": "^2.3.4",
+    "sinon-chai": "^2.11.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },

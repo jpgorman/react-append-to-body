@@ -7,7 +7,7 @@ const expect = chai.expect
 import {
   componentWillAppendToBody,
   unMountComponentWillAppendToBody,
-} from "../src/index"
+} from "../index"
 
 function MockModal({children}) {
   return (

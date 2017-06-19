@@ -1,11 +1,13 @@
 import uuid from "node-uuid"
 import React, {PropTypes} from "react"
-import {componentRegistry} from "./component-registry"
-import {addDefaultContainer} from "./update-dom"
-let componentSubtreeRegistry = componentRegistry()
+import {renderSubtree} from "./render-subtree"
+import {componentRegistry as registerFactory} from "./component-registry"
+import {addDefaultContainer, unMountContainer, containerExists} from "./update-dom"
+const registry = registerFactory({containerExists, unMountContainer}, renderSubtree)
+let componentSubtreeRegistry = registry()
 
 export function unMountComponentWillAppendToBody() {
-  componentSubtreeRegistry = componentRegistry()
+  componentSubtreeRegistry = registry()
 }
 
 export function componentWillAppendToBody(Component) {
@@ -24,6 +26,7 @@ export function componentWillAppendToBody(Component) {
         className: PropTypes.string,
       }
     }
+
     constructor(props) {
       super(props)
       if(props.subtreeContainer === "#subtree-container") {
@@ -32,7 +35,7 @@ export function componentWillAppendToBody(Component) {
     }
 
     componentDidMount() {
-      this.uniqueId = uuid.v1()
+      this.uniqueId = uuid.v4()
       this.add()
     }
 

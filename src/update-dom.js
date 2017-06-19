@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom"
+
 export function addDefaultContainer() {
   if(!containerExists("#subtree-container")) {
     const container = document.createElement("div")
@@ -5,6 +7,10 @@ export function addDefaultContainer() {
     container.setAttribute("class", "subtree-container")
     document.body.appendChild(container)
   }
+}
+
+export function unMountContainer(container) {
+  ReactDOM.unmountComponentAtNode(container)
 }
 
 export function containerExists(selector) {

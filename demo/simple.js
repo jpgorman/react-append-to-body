@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <div>
         <div>Some content on my page</div>
-        <AppendedModal handler={this.closeModal}>
+        <AppendedModal>
           <div>My First Model</div>
         </AppendedModal>
       </div>
