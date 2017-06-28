@@ -1,5 +1,6 @@
 import uuid from "node-uuid"
-import React, {PropTypes} from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import {renderSubtree} from "./render-subtree"
 import {componentRegistry as registerFactory} from "./component-registry"
 import {addDefaultContainer, unMountContainer, containerExists} from "./update-dom"
