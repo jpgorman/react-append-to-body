@@ -2,7 +2,12 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
-import {reject, append, map, addIndex, contains, __} from "ramda"
+import reject from "ramda/src/reject"
+import append from "ramda/src/append"
+import map from "ramda/src/map"
+import addIndex from "ramda/src/addIndex"
+import contains from "ramda/src/contains"
+import __ from "ramda/src/__"
 
 import {
   componentWillAppendToBody
