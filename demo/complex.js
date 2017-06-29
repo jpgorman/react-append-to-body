@@ -2,11 +2,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
-
-import filter from "ramda/src/filter"
-import append from "ramda/src/append"
-import map from "ramda/src/map"
-import contains from "ramda/src/contains"
+import {append, filter, map, contains} from "../src/rambda"
 
 function addIndex(functor){
   return function(fn, ...rest) {
