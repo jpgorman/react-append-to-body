@@ -1,15 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {containerExists} from "./update-dom"
-import reduce from "ramda/src/reduce"
-import map from "ramda/src/map"
-import prop from "ramda/src/prop"
-import propEq from "ramda/src/propEq"
-import compose from "ramda/src/compose"
-import filter from "ramda/src/filter"
-import partial from "ramda/src/partial"
-import keys from "ramda/src/keys"
-import uniq from "ramda/src/uniq"
+import {reduce, map, prop, propEq, compose, filter, uniq} from "rambda"
+
+function partial(fn, args) {
+  return fn.bind(null, ...args)
+}
+
+function keys(object) {
+  return Object.keys(object)
+}
 
 function covertToArray(registry) {
   return reduce((accum, key) => {

@@ -7,8 +7,14 @@
   "description": "Higher order react component that appends components outside of the main applications DOM",
   "main": "dist/index.js",
   "scripts": {
+<<<<<<< HEAD
     "build": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
+=======
+    "build": "babel src --out-dir dist",
+    "build-as-library": "webpack --config ./resources/webpack/production.js -p",
+    "build-watch": "babel src --watch --out-dir dist",
+>>>>>>> Remove Ramda library to reduce bundle size
     "prepublish": "npm run build",
     "test": "mocha --compilers js:babel-register -R dot",
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
@@ -56,7 +62,7 @@
   "dependencies": {
     "node-uuid": "^1.4.7",
     "prop-types": "^15.5.10",
-    "ramda": "^0.22.1",
+    "rambda": "^0.7.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   }

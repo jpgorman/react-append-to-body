@@ -2,12 +2,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {Modal} from "./modal"
-import reject from "ramda/src/reject"
-import append from "ramda/src/append"
-import map from "ramda/src/map"
-import addIndex from "ramda/src/addIndex"
-import contains from "ramda/src/contains"
-import __ from "ramda/src/__"
+import {append, filter, map, contains} from "rambda"
+
+function addIndex(functor){
+  return function(fn, ...rest) {
+    let cnt = 0
+    const newFn = (args) => fn.apply(null, [args, cnt++])
+    return functor.apply(null, [newFn, ...rest])
+  }
+}
 
 import {
   componentWillAppendToBody
@@ -44,7 +47,7 @@ class App extends React.Component {
   }
 
   removeModal(names) {
-    const modals = reject(contains(__, names), this.state.modals)
+    const modals = filter((name) => !contains(name, names), this.state.modals)
     this.setState({
       modals,
     })
