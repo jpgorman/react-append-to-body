@@ -1,4 +1,3 @@
 {
-  "presets": ["latest", "react", "es2015", "stage-0"],
-  "plugins": ["ramda"]
+  "presets": ["latest", "react", "es2015", "stage-0"]
 }
