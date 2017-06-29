@@ -1,4 +1,6 @@
 var path = require("path")
+var webpack = require("webpack")
+var UglifyJSPlugin = require("webpack-uglify-harmony")
 
 module.exports = {
   entry: {
@@ -8,34 +10,49 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/../../dist"),
     publicPath: "/",
-    filename: "[name].js",
+    filename: "[name].entry.js",
     libraryTarget: "umd",
   },
 
-  debug: false,
-  devtool: "source-map",
+  externals: {
+    react: {
+      root: "React",
+      commonjs2: "react",
+      commonjs: "react",
+      amd: "react",
+      umd: "react",
+    },
+    "react-dom": {
+      root: "ReactDOM",
+      commonjs2: "react-dom",
+      commonjs: "react-dom",
+      amd: "react-dom",
+      umd: "react-dom",
+    },
+  },
+
+  debug: true,
+  devtool: "cheap-module-source-map",
 
   resolve: {
     modulesDirectories: ["node_modules"],
     extensions: ["",".js"],
   },
 
-  externals: {
-    react: {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-      umd: 'react',
-    },
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom',
-      umd: 'react-dom',
-    },
-  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new UglifyJSPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
+  ],
 
   module: {
     loaders: [
