@@ -1,4 +1,4 @@
-import uuid from "node-uuid"
+import uuidv4 from "uuid/v4"
 import React from "react"
 import PropTypes from "prop-types"
 import {renderSubtree} from "./render-subtree"
@@ -36,7 +36,7 @@ export function componentWillAppendToBody(Component) {
     }
 
     componentDidMount() {
-      this.uniqueId = uuid.v4()
+      this.uniqueId = uuidv4()
       this.add()
     }
 
