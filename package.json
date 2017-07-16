@@ -56,12 +56,11 @@
     "sinon-chai": "^2.11.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
-    "webpack-uglify-harmony": "^1.0.0"
-  },
-  "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "react-dom": "^15.4.1"
+  },
+  "dependencies": {
     "uuid": "^3.1.0"
   }
 }
