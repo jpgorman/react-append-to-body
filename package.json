@@ -51,14 +51,14 @@
     "jsdom-global": "2.1.0",
     "mocha": "^3.2.0",
     "npm": "^5.0.4",
-    "rambda": "^0.7.3",
-    "sinon": "^2.3.4",
-    "sinon-chai": "^2.11.0",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2",
     "prop-types": "^15.5.10",
+    "rambda": "^0.7.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "uuid": "^3.1.0"
+    "sinon": "^2.3.4",
+    "sinon-chai": "^2.11.0",
+    "uuid": "^3.1.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   }
 }

@@ -1,6 +1,5 @@
 var path = require("path")
 var webpack = require("webpack")
-var UglifyJSPlugin = require("webpack-uglify-harmony")
 
 module.exports = {
   entry: {
@@ -46,7 +45,7 @@ module.exports = {
       }
     }),
     new webpack.optimize.DedupePlugin(),
-    new UglifyJSPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
