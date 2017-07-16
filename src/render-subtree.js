@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {containerExists} from "./update-dom"
-import {reduce, map, prop, propEq, compose, filter, uniq} from "./rambda"
+import {reduce, map, prop, propEq, compose, filter, uniq} from "rambda"
 
 function partial(fn, args) {
   return fn.bind(null, ...args)

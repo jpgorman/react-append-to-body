@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/../../dist"),
     publicPath: "/",
-    filename: "[name].entry.js",
+    filename: "index.js",
     libraryTarget: "umd",
   },
 
@@ -58,7 +58,6 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         loader: "babel-loader",
         query: {
           presets: ["latest", "react"]
