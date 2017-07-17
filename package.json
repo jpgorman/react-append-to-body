@@ -7,8 +7,8 @@
   "description": "Higher order react component that appends components outside of the main applications DOM",
   "main": "dist/main.js",
   "scripts": {
-    "build-es5": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
-    "build": "webpack --config ./resources/webpack/production.js --progress",
+    "build": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
+    "build-node": "webpack --config ./resources/webpack/production.js --progress",
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "mocha --compilers js:babel-register -R dot",
@@ -60,5 +60,12 @@
     "uuid": "^3.1.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "uuid": "^3.1.0",
+    "rambda": "^0.7.3"
   }
 }
