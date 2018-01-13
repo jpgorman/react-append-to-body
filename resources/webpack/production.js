@@ -1,16 +1,16 @@
-var path = require("path")
-var webpack = require("webpack")
+var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
   entry: {
-    main: "./src/index.js",
+    main: "./src/index.js"
   },
 
   output: {
     path: path.join(__dirname, "/../../dist"),
     publicPath: "/",
     filename: "main.js",
-    libraryTarget: "umd",
+    libraryTarget: "umd"
   },
 
   externals: {
@@ -19,15 +19,15 @@ module.exports = {
       commonjs2: "react",
       commonjs: "react",
       amd: "react",
-      umd: "react",
+      umd: "react"
     },
     "react-dom": {
       root: "ReactDOM",
       commonjs2: "react-dom",
       commonjs: "react-dom",
       amd: "react-dom",
-      umd: "react-dom",
-    },
+      umd: "react-dom"
+    }
   },
 
   debug: true,
@@ -35,13 +35,13 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ["node_modules"],
-    extensions: ["",".js"],
+    extensions: ["", ".js"]
   },
 
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify("production")
+        NODE_ENV: JSON.stringify("production")
       }
     }),
     new webpack.optimize.DedupePlugin(),
@@ -50,7 +50,7 @@ module.exports = {
       compress: {
         warnings: false
       }
-    }),
+    })
   ],
 
   module: {
@@ -61,7 +61,7 @@ module.exports = {
         query: {
           presets: ["latest", "react"]
         }
-      },
+      }
     ]
-  },
-}
+  }
+};
