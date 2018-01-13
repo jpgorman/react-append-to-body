@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export function createContextProvider(context) {
   class ContextProvider extends React.Component {
@@ -13,7 +14,7 @@ export function createContextProvider(context) {
 
   ContextProvider.childContextTypes = {};
   Object.keys(context).forEach(key => {
-    ContextProvider.childContextTypes[key] = React.PropTypes.any.isRequired;
+    ContextProvider.childContextTypes[key] = PropTypes.any.isRequired;
   });
 
   return ContextProvider;

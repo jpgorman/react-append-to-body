@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Simple Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0 20px;
+            font: 300 16px/52.4px "Open Sans", Helvetica, Roboto, arial, sans-serif;
+        }
+
+        button {
+            font: 500 14px/19.599999999999998px "Din Bold", Helvetica, Roboto, arial, sans-serif;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #e11b22;
+            background-color: #fff;
+            padding: 10px 24px;
+            line-height: 24px;
+            user-select: none;
+            border: none;
+            box-shadow: 0 0 0 2px #e11b22;
+            border-radius: 6px;
+            text-decoration: none;
+            min-width: 120px;
+            transition: box-shadow .2s ease-out;
+            flex-grow: 1;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 2px #e11b22;
+        }
+
+        button+button {
+            margin-left: 10px;
+        }
+
+        .controls {
+            display: flex;
+
+        }
+
+        .append-element-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div id="app"></div>
+    <script src="/context.entry.js"></script>
+
+</html>

@@ -2,11 +2,12 @@ module.exports = {
   entry: {
     simple: "./demo/simple.js",
     complex: "./demo/complex.js",
+    context: "./demo/context.js"
   },
 
   output: {
     publicPath: "/",
-    filename: "[name].entry.js",
+    filename: "[name].entry.js"
   },
 
   debug: true,
@@ -14,7 +15,7 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ["node_modules"],
-    extensions: ["",".js"],
+    extensions: ["", ".js"]
   },
 
   module: {
@@ -26,7 +27,7 @@ module.exports = {
         query: {
           presets: ["latest", "react"]
         }
-      },
+      }
     ]
-  },
-}
+  }
+};
