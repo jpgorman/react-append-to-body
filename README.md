@@ -2,44 +2,42 @@
 [![npm version](https://badge.fury.io/js/react-append-to-body.svg)](https://badge.fury.io/js/react-append-to-body)
 
 # React higher order component append to body
+
 [React] Higher order component that allows you to attach components to the DOM outside of the main app.
 
-[React]: https://facebook.github.io/react/
+[react]: https://facebook.github.io/react/
 
 # Installation
+
 ```sh
 npm i react-append-to-body --save
 ```
 
 # Use
+
 ```js
-import {componentWillAppendToBody} from "react-append-to-body"
+import { componentWillAppendToBody } from "react-append-to-body";
 
 /* Some component that you want to attach to the DOM */
-function MyComponent({children}) {
-  return (
-    <div className="myClassName">
-      {children}
-    </div>
-  )
+function MyComponent({ children }) {
+  return <div className="myClassName">{children}</div>;
 }
 
-const AppendedMyComponent = componentWillAppendToBody(MyComponent)
+const AppendedMyComponent = componentWillAppendToBody(MyComponent);
 
 class MyApp extends React.Component {
-  render () {
+  render() {
     return (
       <div>
-        // this content will be rendered in the main app
-        Some content on my page
-
+        // this content will be rendered in the main app Some content on my page
         // this content will be rendered outside of the main app
-        <AppendedMyComponent>The content for my appended component</AppendedMyComponent>
+        <AppendedMyComponent>
+          The content for my appended component
+        </AppendedMyComponent>
       </div>
-    )
+    );
   }
 }
-
 ```
 
 ```html
@@ -79,16 +77,22 @@ class MyApp extends React.Component {
 ```
 
 ### Appending to a named DOM node
+
 ```js
-const AppendedMyComponent = componentWillAppendToBody(MyComponent)
+const AppendedMyComponent = componentWillAppendToBody(MyComponent);
 class MyApp extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         Some content on my page // this content will be rendered in the main app
-        <AppendedMyComponent subtreeContainer={"#my-named-element-to-append-with"}>The content for my appended component</AppendedMyComponent> // this content will be rendered outside of the main app
+        <AppendedMyComponent
+          subtreeContainer={"#my-named-element-to-append-with"}
+        >
+          The content for my appended component
+        </AppendedMyComponent> // this content will be rendered outside of the main
+        app
       </div>
-    )
+    );
   }
 }
 ```
@@ -131,15 +135,29 @@ class MyApp extends React.Component {
 </html>
 ```
 
+### With Context
+
+If you want to persist Context into the appended component you can do this by simple setting the contextTypes on the appended component.
+
+```js
+// using React Router
+
+const Modal = componentWillAppendToBody(Modal);
+Modal.contextTypes = {
+  router: React.PropTypes.any.isRequired
+};
+```
+
 ## API
 
 `subtreeContainer` a string that should contain a selector that will work with document.querySelector [MDN]: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
 
-
 ## Tests
+
 `npm run test`
 
 # Demo
+
 `npm run demo`
 
 Then open up your browser at http://localhost:8777
