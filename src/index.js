@@ -1,5 +1,6 @@
 import uuidv4 from "uuid/v4";
 import React from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { renderSubtree } from "./render-subtree";
 import { componentRegistry as registerFactory } from "./component-registry";
@@ -9,6 +10,7 @@ import {
   unMountContainer,
   containerExists
 } from "./update-dom";
+
 const registry = registerFactory(
   { containerExists, unMountContainer },
   renderSubtree
@@ -45,11 +47,11 @@ export function componentWillAppendToBody(Component) {
 
     componentDidMount() {
       this.uniqueId = uuidv4();
-      this.add();
+      !ReactDOM.createPortal && this.add();
     }
 
     componentDidUpdate() {
-      this.update();
+      !ReactDOM.createPortal && this.update();
     }
 
     componentWillUnmount() {
@@ -66,14 +68,14 @@ export function componentWillAppendToBody(Component) {
     }
 
     update() {
-      componentSubtreeRegistry.updateElement(
+      return componentSubtreeRegistry.updateElement(
         this.uniqueId,
         this.getComponent()
       );
     }
 
     add() {
-      componentSubtreeRegistry.addElement(
+      return componentSubtreeRegistry.updateElement(
         this.uniqueId,
         this.getComponent(),
         this.props.subtreeContainer
@@ -81,7 +83,9 @@ export function componentWillAppendToBody(Component) {
     }
 
     render() {
-      // NOTE: since this is an append body component, we need to manage the rendering ourselves
+      if (!!ReactDOM.createPortal)
+        return !this.uniqueId ? this.add() : this.update();
+
       return null;
     }
   };

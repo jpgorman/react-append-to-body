@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Modal } from "./modal";
 
@@ -12,9 +13,9 @@ function AfterNav({ children }) {
 }
 
 const AppendedAfterNav = componentWillAppendToBody(AfterNav);
-AppendedAfterNav.contextTypes = {
-  router: React.PropTypes.any.isRequired
-};
+// AppendedAfterNav.contextTypes = {
+//   router: PropTypes.any.isRequired
+// };
 
 const Dashboard = () => <div>Dashboard</div>;
 const Chores = () => <div>Chores</div>;

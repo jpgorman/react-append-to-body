@@ -29,12 +29,12 @@ function uniqueContainers(registry) {
 function appendToDOM(selector, arrayOfElements) {
   const container = containerExists(selector);
   if (container) {
-    ReactDOM.render(<span>{arrayOfElements}</span>, container);
+    return ReactDOM.createPortal(<span>{arrayOfElements}</span>, container);
   }
 }
 
 function injectSubtree(registry, selector) {
-  compose(
+  return compose(
     partial(appendToDOM, [selector]),
     reduce(
       (arrayOfElements, item) => (
