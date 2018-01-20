@@ -4,14 +4,11 @@ export const componentRegistry = (DOMreconciler, renderer) => (
   return {
     updateElement(id, element, selector) {
       if (registry.hasOwnProperty(id)) {
-        console.log("update");
         registry[id].element = element;
-        return renderer(registry);
       } else {
-        console.log("add");
         registry[id] = { element, selector };
-        return renderer(registry);
       }
+      return renderer(registry);
     },
     deleteElement(id) {
       if (registry.hasOwnProperty(id)) {
