@@ -1,18 +1,15 @@
 {
   "name": "react-append-to-body",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "engines": {
     "node": ">=4.0.0"
   },
-  "description":
-    "Higher order react component that appends components outside of the main applications DOM",
+  "description": "Higher order react component that appends components outside of the main applications DOM",
   "main": "dist/main.js",
   "scripts": {
     "build-es5": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
-    "build":
-      "NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
-    "build-watch":
-      "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
+    "build": "NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
+    "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "npm run test-react-15 && npm run test-react-16",
     "test-react-16": "npm run env-react16 && npm run test-runner",
@@ -21,17 +18,19 @@
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
     "lint": "eslint src/*.js test/*.js",
     "demo": "resources/scripts/demo.sh",
-    "env-react16":
-      "npm run env-teardown && yarn add react@16 && yarn add react-dom@16",
-    "env-react15":
-      "npm run env-teardown && yarn add react@15 && yarn add react-dom@15",
+    "env-react16": "npm run env-teardown && yarn add react@16 && yarn add react-dom@16",
+    "env-react15": "npm run env-teardown && yarn add react@15 && yarn add react-dom@15",
     "env-teardown": "yarn remove react && yarn remove react-dom"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jpgorman/react-append-to-body.git"
   },
-  "keywords": ["react", "HOC", "Append to DOM"],
+  "keywords": [
+    "react",
+    "HOC",
+    "Append to DOM"
+  ],
   "author": "JP Gorman",
   "license": "ISC",
   "bugs": {
