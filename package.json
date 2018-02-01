@@ -11,10 +11,16 @@
     "build": "NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
-    "test": "mocha --compilers js:babel-register -R dot",
+    "test": "npm run test-react-15 && npm run test-react-16",
+    "test-react-16": "npm run env-react16 && npm run test-runner",
+    "test-react-15": "npm run env-react15 && npm run test-runner",
+    "test-runner": "mocha --compilers js:babel-register -R dot",
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
     "lint": "eslint src/*.js test/*.js",
-    "demo": "resources/scripts/demo.sh"
+    "demo": "resources/scripts/demo.sh",
+    "env-react16": "npm run env-teardown && yarn add react@16 && yarn add react-dom@16",
+    "env-react15": "npm run env-teardown && yarn add react@15 && yarn add react-dom@15",
+    "env-teardown": "yarn remove react && yarn remove react-dom"
   },
   "repository": {
     "type": "git",
@@ -31,6 +37,10 @@
     "url": "https://github.com/jpgorman/react-append-to-body/issues"
   },
   "homepage": "https://github.com/jpgorman/react-append-to-body#readme",
+  "dependencies": {
+    "react": "15",
+    "react-dom": "15"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
     "babel-cli": "^6.18.0",
@@ -54,8 +64,6 @@
     "npm": "^5.0.4",
     "prop-types": "^15.6.0",
     "rambda": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",

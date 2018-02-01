@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import { containerExists } from "./update-dom";
 import { reduce, map, prop, propEq, compose, filter, uniq } from "rambda";
 
+const render = !!ReactDOM.createPortal
+  ? ReactDOM.createPortal
+  : ReactDOM.render;
+
 function partial(fn, args) {
   return fn.bind(null, ...args);
 }
@@ -29,7 +33,7 @@ function uniqueContainers(registry) {
 function appendToDOM(selector, arrayOfElements) {
   const container = containerExists(selector);
   if (container) {
-    return ReactDOM.createPortal(<span>{arrayOfElements}</span>, container);
+    return render(<span>{arrayOfElements}</span>, container);
   }
 }
 
