@@ -12,14 +12,14 @@
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "npm run test-react-15 && npm run test-react-16",
-    "test-react-16": "npm run env-react16 && npm run test-runner",
-    "test-react-15": "npm run env-react15 && npm run test-runner",
+    "test-react-16": "npm run env-react16 && npm run test-runner && npm run env-teardown",
+    "test-react-15": "npm run env-react15 && npm run test-runner && npm run env-teardown",
     "test-runner": "mocha --compilers js:babel-register -R dot",
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
     "lint": "eslint src/*.js test/*.js",
-    "demo": "resources/scripts/demo.sh",
-    "env-react16": "npm run env-teardown && yarn add react@16 && yarn add react-dom@16",
-    "env-react15": "npm run env-teardown && yarn add react@15 && yarn add react-dom@15",
+    "demo": "npm run env-react16 && resources/scripts/demo.sh",
+    "env-react16": "yarn add react@16 --dev && yarn add react-dom@16 --dev",
+    "env-react15": "yarn add react@15 --dev && yarn add react-dom@15 --dev",
     "env-teardown": "yarn remove react && yarn remove react-dom"
   },
   "repository": {
@@ -60,11 +60,14 @@
     "npm": "^5.0.4",
     "prop-types": "^15.6.0",
     "rambda": "^1.0.0",
+    "react": "16",
+    "react-dom": "16",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
     "uuid": "^3.1.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
-  }
+  },
+  "dependencies": {}
 }
