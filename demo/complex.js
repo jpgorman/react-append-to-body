@@ -18,6 +18,46 @@ const PortalA = componentWillAppendToBody(Modal);
 const PortalB = componentWillAppendToBody(Modal);
 const PortalC = componentWillAppendToBody(Modal);
 
+const modalMap = {
+  modalA: props => (
+    <PortalA>
+      <div>My First App</div>
+      <div id="inner-modal" />
+      <div className="controls">
+        <button onClick={props.removeModal.bind(null, ["modalA", "modalC"])}>
+          Close App
+        </button>
+        <button key="btn3" onClick={props.addModal.bind(null, "modalC")}>
+          Open App C in App A
+        </button>
+      </div>
+    </PortalA>
+  ),
+  modalB: props => {
+    return (
+      <PortalB subtreeContainer={"#other-element-container"}>
+        <div>My Second App</div>
+        <div>
+          <input onChange={props.handler} value={props.value} />
+        </div>
+        <div>
+          <button onClick={props.removeModal.bind(null, ["modalB"])}>
+            Close App
+          </button>
+        </div>
+      </PortalB>
+    );
+  },
+  modalC: props => (
+    <PortalC subtreeContainer={"#inner-modal"}>
+      <div>My Third App</div>
+      <button onClick={props.removeModal.bind(null, ["modalC"])}>
+        Close App
+      </button>
+    </PortalC>
+  )
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -51,44 +91,6 @@ class App extends React.Component {
   }
 
   render() {
-    const modalMap = {
-      modalA: (
-        <PortalA>
-          <div>My First App</div>
-          <div id="inner-modal" />
-          <div className="controls">
-            <button onClick={this.removeModal.bind(null, ["modalA", "modalC"])}>
-              Close App
-            </button>
-            <button key="btn3" onClick={this.addModal.bind(null, "modalC")}>
-              Open App C in App A
-            </button>
-          </div>
-        </PortalA>
-      ),
-      modalB: (
-        <PortalB subtreeContainer={"#other-element-container"}>
-          <div>My Second App</div>
-          <div>
-            <input onChange={this.handler} value={this.state.value} />
-          </div>
-          <div>
-            <button onClick={this.removeModal.bind(null, ["modalB"])}>
-              Close App
-            </button>
-          </div>
-        </PortalB>
-      ),
-      modalC: (
-        <PortalC subtreeContainer={"#inner-modal"}>
-          <div>My Third App</div>
-          <button onClick={this.removeModal.bind(null, ["modalC"])}>
-            Close App
-          </button>
-        </PortalC>
-      )
-    };
-
     const buttons = [
       <button key="btn1" onClick={this.addModal.bind(null, "modalA")}>
         Open App A
@@ -97,15 +99,20 @@ class App extends React.Component {
         Open App B
       </button>
     ];
-
     return (
       <div>
         <div>This is my main app</div>
         <div>{buttons}</div>
-        {addIndex(map)(
-          (name, index) => <span key={index}>{modalMap[name]}</span>,
-          this.state.modals
-        )}
+        {addIndex(map)((name, index) => {
+          const Component = modalMap[name];
+          const props = {
+            removeModal: this.removeModal,
+            addModal: this.addModal,
+            handler: this.handler,
+            value: this.state.value
+          };
+          return <Component key={index} {...props} />;
+        }, this.state.modals)}
       </div>
     );
   }

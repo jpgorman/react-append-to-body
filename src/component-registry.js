@@ -21,7 +21,7 @@ export const componentRegistry = (DOMreconciler, renderer) => (
         );
         if (container) {
           DOMreconciler.unMountContainer(container);
-          renderer(registry);
+          return renderer(registry);
         }
       }
     }

@@ -4,10 +4,8 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Modal } from "./modal";
-
 import { componentWillAppendToBody } from "../src/";
 
-// const AppendedModal = componentWillAppendToBody(Modal)
 function AfterNav({ children }) {
   return <div>{children}</div>;
 }

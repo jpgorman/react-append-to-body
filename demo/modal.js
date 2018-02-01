@@ -1,7 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from "react"
+import React from "react";
+import ReactDOM from "react-dom";
 
-export function Modal({children}) {
+console.log(
+  `Using ${ReactDOM.createPortal ? `ReactDOM.createPortal` : `ReactDOM.render`}`
+);
+
+export function Modal({ children }) {
   const style = {
     outer: {
       borderRadius: 4,
@@ -9,21 +14,19 @@ export function Modal({children}) {
       maxWidth: 500,
       boxShadow: "0 2px 5px 0 rgba(91,91,91,1)",
       position: "relative",
-      border: "2px solid red",
+      border: "2px solid red"
     },
     inner: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 20,
-      background: "white",
+      background: "white"
     }
-  }
+  };
   return (
     <div style={style.outer}>
-      <div style={style.inner}>
-        {children}
-      </div>
+      <div style={style.inner}>{children}</div>
     </div>
-  )
+  );
 }

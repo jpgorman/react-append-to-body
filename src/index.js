@@ -45,9 +45,9 @@ export function componentWillAppendToBody(Component) {
       }
     }
 
-    componentDidMount() {
+    componentWillMount() {
       this.uniqueId = uuidv4();
-      !ReactDOM.createPortal && this.add();
+      !ReactDOM.createPortal && this.update();
     }
 
     componentDidUpdate() {
@@ -70,21 +70,17 @@ export function componentWillAppendToBody(Component) {
     update() {
       return componentSubtreeRegistry.updateElement(
         this.uniqueId,
-        this.getComponent()
-      );
-    }
-
-    add() {
-      return componentSubtreeRegistry.updateElement(
-        this.uniqueId,
         this.getComponent(),
         this.props.subtreeContainer
       );
     }
 
     render() {
-      if (!!ReactDOM.createPortal)
-        return !this.uniqueId ? this.add() : this.update();
+      if (ReactDOM.createPortal)
+        return ReactDOM.createPortal(
+          this.getComponent(),
+          containerExists(this.props.subtreeContainer)
+        );
 
       return null;
     }
