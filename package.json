@@ -60,8 +60,6 @@
     "npm": "^5.0.4",
     "prop-types": "^15.6.0",
     "rambda": "^1.0.0",
-    "react": "16",
-    "react-dom": "16",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
