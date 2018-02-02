@@ -8,7 +8,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build-es5": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
-    "build": "set NODE_ENV=production && webpack --config ./resources/webpack/production.js --progress",
+    "build": "cross-env NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "npm run test-react-15 && npm run test-react-16",
@@ -69,5 +69,7 @@
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cross-env": "^5.1.3"
+  }
 }
