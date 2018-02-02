@@ -4,20 +4,26 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "description": "Higher order react component that appends components outside of the main applications DOM",
+  "description":
+    "Higher order react component that appends components outside of the main applications DOM",
   "main": "dist/main.js",
   "scripts": {
     "build-es5": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
-    "build": "cross-env NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
-    "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
+    "build":
+      "cross-env NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
+    "build-watch":
+      "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "npm run test-react-15 && npm run test-react-16",
-    "test-react-16": "npm run env-react16 && npm run test-runner && npm run env-teardown",
-    "test-react-15": "npm run env-react15 && npm run test-runner && npm run env-teardown",
+    "test-react-16":
+      "npm run env-react16 && npm run test-runner && npm run env-teardown",
+    "test-react-15":
+      "npm run env-react15 && npm run test-runner && npm run env-teardown",
     "test-runner": "mocha --compilers js:babel-register -R dot",
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
     "lint": "eslint src/*.js test/*.js",
-    "demo": "npm run env-react16 && webpack-dev-server --config ./resources/webpack/demo.js --content-base demo/ --colors --progress --host 0.0.0.0 --port 8777 --hot",
+    "demo":
+      "npm run env-react16 && webpack-dev-server --config ./resources/webpack/demo.js --content-base demo/ --colors --progress --host 0.0.0.0 --port 8777 --hot",
     "env-react16": "yarn add react@16 --dev && yarn add react-dom@16 --dev",
     "env-react15": "yarn add react@15 --dev && yarn add react-dom@15 --dev",
     "env-teardown": "yarn remove react && yarn remove react-dom"
@@ -26,11 +32,7 @@
     "type": "git",
     "url": "git+https://github.com/jpgorman/react-append-to-body.git"
   },
-  "keywords": [
-    "react",
-    "HOC",
-    "Append to DOM"
-  ],
+  "keywords": ["react", "HOC", "Append to DOM"],
   "author": "JP Gorman",
   "license": "ISC",
   "bugs": {
@@ -60,8 +62,6 @@
     "npm": "^5.0.4",
     "prop-types": "^15.6.0",
     "rambda": "^1.0.0",
-    "react": "16",
-    "react-dom": "16",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
