@@ -8,7 +8,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build-es5": "babel src --out-dir dist --ignore '**/__tests__/*.js'",
-    "build": "NODE_ENV=production webpack --config ./resources/webpack/production.js --progress",
+    "build": "set NODE_ENV=production && webpack --config ./resources/webpack/production.js --progress",
     "build-watch": "babel src --watch --out-dir dist --ignore '**/__tests__/*.js'",
     "prepublish": "npm run build",
     "test": "npm run test-react-15 && npm run test-react-16",
@@ -17,7 +17,7 @@
     "test-runner": "mocha --compilers js:babel-register -R dot",
     "test-watch": "mocha --watch --compilers js:babel-register -R dot",
     "lint": "eslint src/*.js test/*.js",
-    "demo": "npm run env-react16 && resources/scripts/demo.sh",
+    "demo": "npm run env-react16 && webpack-dev-server --config ./resources/webpack/demo.js --content-base demo/ --colors --progress --host 0.0.0.0 --port 8777 --hot",
     "env-react16": "yarn add react@16 --dev && yarn add react-dom@16 --dev",
     "env-react15": "yarn add react@15 --dev && yarn add react-dom@15 --dev",
     "env-teardown": "yarn remove react && yarn remove react-dom"
@@ -60,6 +60,8 @@
     "npm": "^5.0.4",
     "prop-types": "^15.6.0",
     "rambda": "^1.0.0",
+    "react": "16",
+    "react-dom": "16",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
