@@ -1,21 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
 export function createContextProvider(context) {
   class ContextProvider extends React.Component {
     getChildContext() {
-      return context;
+      return context
     }
 
     render() {
-      return this.props.children;
+      return this.props.children
     }
   }
+  
+  ContextProvider.propTypes = {
+    children: PropTypes.any.isRequired,
+  }
 
-  ContextProvider.childContextTypes = {};
+  ContextProvider.childContextTypes = {}
   Object.keys(context).forEach(key => {
-    ContextProvider.childContextTypes[key] = PropTypes.any.isRequired;
-  });
+    ContextProvider.childContextTypes[key] = PropTypes.any.isRequired
+  })
 
-  return ContextProvider;
+  return ContextProvider
 }

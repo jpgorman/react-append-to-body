@@ -1,24 +1,24 @@
-import uuidv4 from "uuid/v4";
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import { renderSubtree } from "./render-subtree";
-import { componentRegistry as registerFactory } from "./component-registry";
-import { createContextProvider } from "./context-provider";
+import uuidv4 from "uuid/v4"
+import React from "react"
+import ReactDOM from "react-dom"
+import PropTypes from "prop-types"
+import { renderSubtree } from "./render-subtree"
+import { componentRegistry as registerFactory } from "./component-registry"
+import { createContextProvider } from "./context-provider"
 import {
   addDefaultContainer,
   unMountContainer,
   containerExists
-} from "./update-dom";
+} from "./update-dom"
 
 const registry = registerFactory(
   { containerExists, unMountContainer },
   renderSubtree
-);
-let componentSubtreeRegistry = registry();
+)
+let componentSubtreeRegistry = registry()
 
 export function unMountComponentWillAppendToBody() {
-  componentSubtreeRegistry = registry();
+  componentSubtreeRegistry = registry()
 }
 
 export function componentWillAppendToBody(Component) {
@@ -27,44 +27,44 @@ export function componentWillAppendToBody(Component) {
       return {
         subtreeContainer: "#subtree-container",
         context: {}
-      };
+      }
     }
 
     static get propTypes() {
       return {
         subtreeContainer: PropTypes.string,
         className: PropTypes.string
-      };
+      }
     }
 
     constructor(props, context) {
-      super(props);
-      this.ContextProvider = createContextProvider(context);
+      super(props)
+      this.ContextProvider = createContextProvider(context)
       if (props.subtreeContainer === "#subtree-container") {
-        addDefaultContainer();
+        addDefaultContainer()
       }
     }
 
     componentWillMount() {
-      this.uniqueId = uuidv4();
-      !ReactDOM.createPortal && this.update();
+      this.uniqueId = uuidv4()
+      !ReactDOM.createPortal && this.update()
     }
 
     componentDidUpdate() {
-      !ReactDOM.createPortal && this.update();
+      !ReactDOM.createPortal && this.update()
     }
 
     componentWillUnmount() {
-      componentSubtreeRegistry.deleteElement(this.uniqueId);
+      componentSubtreeRegistry.deleteElement(this.uniqueId)
     }
 
     getComponent() {
-      const ContextProvider = this.ContextProvider;
+      const ContextProvider = this.ContextProvider
       return (
         <ContextProvider key={this.uniqueId}>
           <Component {...this.props} />
         </ContextProvider>
-      );
+      )
     }
 
     update() {
@@ -72,7 +72,7 @@ export function componentWillAppendToBody(Component) {
         this.uniqueId,
         this.getComponent(),
         this.props.subtreeContainer
-      );
+      )
     }
 
     render() {
@@ -80,9 +80,9 @@ export function componentWillAppendToBody(Component) {
         return ReactDOM.createPortal(
           this.getComponent(),
           containerExists(this.props.subtreeContainer)
-        );
+        )
 
-      return null;
+      return null
     }
-  };
+  }
 }

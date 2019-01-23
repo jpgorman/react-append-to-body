@@ -1,35 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { containerExists } from "./update-dom";
-import { reduce, map, prop, propEq, compose, filter, uniq } from "rambda";
+import React from "react"
+import ReactDOM from "react-dom"
+import { containerExists } from "./update-dom"
+import { reduce, map, prop, propEq, compose, filter, uniq } from "rambda"
 
 function partial(fn, args) {
-  return fn.bind(null, ...args);
+  return fn.bind(null, ...args)
 }
 
 function keys(object) {
-  return Object.keys(object);
+  return Object.keys(object)
 }
 
 function covertToArray(registry) {
   return reduce(
     (accum, key) => {
-      accum.push(registry[key]);
-      return accum;
+      accum.push(registry[key])
+      return accum
     },
     [],
     keys(registry)
-  );
+  )
 }
 
 function uniqueContainers(registry) {
-  return compose(uniq, map(prop("selector")))(covertToArray(registry));
+  return compose(uniq, map(prop("selector")))(covertToArray(registry))
 }
 
 function appendToDOM(selector, arrayOfElements) {
-  const container = containerExists(selector);
+  const container = containerExists(selector)
   if (container) {
-    return ReactDOM.render(<span>{arrayOfElements}</span>, container);
+    return ReactDOM.render(<span>{arrayOfElements}</span>, container)
   }
 }
 
@@ -43,9 +43,9 @@ function injectSubtree(registry, selector) {
       []
     ),
     filter(propEq("selector", selector))
-  )(covertToArray(registry));
+  )(covertToArray(registry))
 }
 
 export function renderSubtree(registry) {
-  return map(injectSubtree.bind(null, registry), uniqueContainers(registry));
+  return map(injectSubtree.bind(null, registry), uniqueContainers(registry))
 }

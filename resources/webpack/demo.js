@@ -1,4 +1,9 @@
+
 module.exports = {
+  mode: 'development',
+  devServer: {
+    disableHostCheck: true,
+  },
   entry: {
     simple: "./demo/simple.js",
     complex: "./demo/complex.js",
@@ -10,24 +15,21 @@ module.exports = {
     filename: "[name].entry.js"
   },
 
-  debug: true,
   devtool: "source-map",
 
   resolve: {
-    modulesDirectories: ["node_modules"],
-    extensions: ["", ".js"]
+    modules: ["node_modules"],
+    extensions: [".js"]
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ["latest", "react"]
-        }
+        use: ["babel-loader"],
       }
     ]
   }
+
 };

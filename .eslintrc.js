@@ -20,6 +20,7 @@ module.exports = {
     ],
     "rules": {
         "react/display-name": 1,
+        "react/no-render-return-value": 0,
         "indent": ["error", 2],
         "linebreak-style": [
             2

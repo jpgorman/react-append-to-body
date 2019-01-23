@@ -2,6 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
+  mode: 'production',
   entry: {
     main: "./src/index.js"
   },
@@ -30,12 +31,11 @@ module.exports = {
     }
   },
 
-  debug: true,
   devtool: "cheap-module-source-map",
 
   resolve: {
-    modulesDirectories: ["node_modules"],
-    extensions: ["", ".js"]
+    modules: ["node_modules"],
+    extensions: [".js"]
   },
 
   plugins: [
@@ -44,23 +44,14 @@ module.exports = {
         NODE_ENV: JSON.stringify("production")
       }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    })
   ],
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        query: {
-          presets: ["latest", "react"]
-        }
+        exclude: /node_modules/,
+        use: ["babel-loader"],
       }
     ]
   }
