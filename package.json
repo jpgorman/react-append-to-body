@@ -2,7 +2,7 @@
   "name": "react-append-to-body",
   "version": "2.0.20",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.11.5"
   },
   "description": "Higher order react component that appends components outside of the main applications DOM",
   "main": "dist/main.js",
