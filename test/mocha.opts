@@ -3,5 +3,5 @@
 --recursive
 --timeout 4000
 --colors
---compilers js:babel-register
+--require @babel/register
 src/**/__tests__/*.js
