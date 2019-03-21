@@ -4083,9 +4083,10 @@ querystringify@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
 
-rambda@^1.0.0:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/rambda/-/rambda-1.2.6.tgz#5feed8039369b65c389ee1e02db9527695d30e83"
+rambda@0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/rambda/-/rambda-0.9.3.tgz#51a89f52b4a5c4bb731aa8e800302eb893491a73"
+  integrity sha512-+K3qAfORhaZZ6U8chjfHHlfzYs/Pc1G0F5RAWBIHrkqLdojt3I92J+ER5GyEwx44+8nNSb6HzxqcNIVNnASufA==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
