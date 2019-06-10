@@ -23,7 +23,7 @@ module.exports = {
         "react/no-render-return-value": 0,
         "indent": ["error", 2],
         "linebreak-style": [
-            2
+            0
         ],
         "quotes": [
             "error",
