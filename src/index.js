@@ -40,15 +40,15 @@ export function componentWillAppendToBody(Component) {
     constructor(props, context) {
       super(props)
       this.ContextProvider = createContextProvider(context)
+
       if (props.subtreeContainer === "#subtree-container") {
         addDefaultContainer()
       }
-    }
 
-    componentWillMount() {
       this.uniqueId = uuidv4()
       !ReactDOM.createPortal && this.update()
     }
+
 
     componentDidUpdate() {
       !ReactDOM.createPortal && this.update()
