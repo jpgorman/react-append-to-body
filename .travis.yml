@@ -10,7 +10,7 @@ before_deploy:
 jobs:
   include:
     - stage: npm release
-      node_js: "8.0"
+      node_js: "10.0"
       script: echo "Deploying to npm"
       deploy:
         provider: npm
