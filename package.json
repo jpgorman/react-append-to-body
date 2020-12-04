@@ -17,7 +17,7 @@
     "test-runner": "mocha --require @babel/register -R dot",
     "test-watch": "mocha --watch --require @babel/register -R dot",
     "lint": "eslint src/*.js test/*.js",
-    "demo": "npm run env-react16 && webpack-dev-server --config ./resources/webpack/demo.js --content-base demo/ --colors --progress --host 0.0.0.0 --port 8777 --hot",
+    "demo": "npm run env-react15 && webpack-dev-server --config ./resources/webpack/demo.js --content-base demo/ --colors --progress --host 0.0.0.0 --port 8777 --hot",
     "env-react16": "yarn add react@16 --dev && yarn add react-dom@16 --dev",
     "env-react15": "yarn add react@15 --dev && yarn add react-dom@15 --dev",
     "env-teardown": "yarn remove react && yarn remove react-dom"
@@ -55,6 +55,8 @@
     "mocha": "^6.0.2",
     "prop-types": "^15.6.0",
     "rambda": "0.9.3",
+    "react": "15",
+    "react-dom": "15",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",

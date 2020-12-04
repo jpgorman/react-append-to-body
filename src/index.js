@@ -60,9 +60,10 @@ export function componentWillAppendToBody(Component) {
 
     getComponent() {
       const ContextProvider = this.ContextProvider
+      const { subtreeContainer, ...rest} = this.props
       return (
         <ContextProvider key={this.uniqueId}>
-          <Component {...this.props} />
+          <Component {...rest} />
         </ContextProvider>
       )
     }
