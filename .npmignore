@@ -2,6 +2,9 @@ demo
 resources
 src
 test
+.eslintrc.js
+.browserslistrc
+mocha.opts
 .babelrc
 .eslintrc
 .gitignore
