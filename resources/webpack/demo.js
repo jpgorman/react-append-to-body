@@ -1,8 +1,9 @@
+var path = require('path')
 
 module.exports = {
   mode: 'development',
   devServer: {
-    disableHostCheck: true,
+    static: "./demo/"
   },
   entry: {
     simple: "./demo/simple.js",
