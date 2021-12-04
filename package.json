@@ -1,6 +1,6 @@
 {
   "name": "react-append-to-body",
-  "version": "2.0.26",
+  "version": "2.0.27",
   "engines": {
     "node": ">=6.11.5"
   },
@@ -55,8 +55,6 @@
     "mocha": "^6.0.2",
     "prop-types": "^15.6.0",
     "rambda": "0.9.3",
-    "react": "15",
-    "react-dom": "15",
     "react-router-dom": "^4.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
