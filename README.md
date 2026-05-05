@@ -6,9 +6,6 @@ All functionality has been supported by [React Portals](https://react.dev/refere
 
 ***
 
-[![Build Status](https://travis-ci.org/jpgorman/react-append-to-body.svg?branch=master)](https://travis-ci.org/jpgorman/react-append-to-body)
-[![npm version](https://badge.fury.io/js/react-append-to-body.svg)](https://badge.fury.io/js/react-append-to-body)
-
 # React higher order component append to body
 
 [React] Higher order component that allows you to attach components to the DOM outside of the main app. Supports __React 16__ and __React 15__  and less, so works with and without ReactDOM.createPortal.
