@@ -1,6 +1,10 @@
 # DEPRECATED
+
 This repo is no longer maintained.
+
 All functionality has been supported by [React Portals](https://react.dev/reference/react-dom/createPortal)
+
+***
 
 [![Build Status](https://travis-ci.org/jpgorman/react-append-to-body.svg?branch=master)](https://travis-ci.org/jpgorman/react-append-to-body)
 [![npm version](https://badge.fury.io/js/react-append-to-body.svg)](https://badge.fury.io/js/react-append-to-body)
